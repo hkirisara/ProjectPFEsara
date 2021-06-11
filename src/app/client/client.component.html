@@ -1,0 +1,167 @@
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2><b>Gestion des Clients</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="#addClientModal" class="btn btn-info" data-toggle="modal" (click)="openPopup()">
+                            <i class="material-icons">&#xE147;</i> <span></span></a>
+                        <div class="search-box">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                                <input type="text" [(ngModel)]="raisonsocial" (input)="search()" class="form-control"
+                                    placeholder="Search&hellip;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+
+                        <th>
+                            
+                        </th>
+                        <th>Raison social</th>
+                        <th>Adresse</th>
+                        <th>Ville</th>
+                        <th>Telephone</th>
+                        <th>Email</th>
+                        <th>TVA</th>
+                        <th>Timbre</th>
+                        <th>Remise</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let c of client | paginate: { itemsPerPage: 8, currentPage: page ,totalItems:totalLength}; let i=index'>
+
+                        <td>
+                            
+                        </td>
+                        <td>{{c.raisonsocial }}</td>
+                        <td>{{c.adresse }}</td>
+                        <td>{{c.ville }}</td>
+                        <td>{{c.telephone }}</td>
+                        <td>{{c.email }}</td>
+                        <td><input type="checkbox" name="tva" [checked]="c.tva" [disabled]="'true'"></td>
+                        <td><input type="checkbox" name="timbre" [checked]="c.timbre" [disabled]="'true'"></td>
+                        <td><input type="checkbox" name="remise" [checked]="c.remise" [disabled]="'true'"></td>
+                        <td>
+                            <a href="#addClientModal" class="edit" data-toggle="modal" tva="button"
+                                (click)="moveDataToModifForm(i)"><i class="material-icons" data-toggle="tooltip"
+                                    title="Modifier">&#xE254;</i></a>
+
+                            <a href="#deleteClientModal" class="delete" data-toggle="modal" tva="button"
+                                (click)="moveIDToDeleteForm(i)"><i class="material-icons" data-toggle="tooltip"
+                                    title="Supprimer">&#xE872;</i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls></div>
+
+    
+</div>
+<!-- Add Modal HTML -->
+<div id="addClientModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="addClientForm">
+                <div class="modal-header">
+                    <h4 class="modal-title" *ngIf="action == 'new'">Ajouter Client </h4>
+                    <h4 class="modal-title" *ngIf="action == 'edit'">Modifier Client </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Raison social <span class="color-error">*</span></label>
+                        <input type="text" id="raisonsocial" formControlName="raisonsocial" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addClientForm.controls.raisonsocial.errors, 'is-valid': submitted &&  !addClientForm.controls.raisonsocial.errors}">
+                        <div *ngIf="isElementNotValid('raisonsocial')" class="invalid-feedback d-block">
+                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Adresse <span class="color-error">*</span></label>
+                        <input type="text" id="adresse" formControlName="adresse" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addClientForm.controls.adresse.errors, 'is-valid': submitted &&  !addClientForm.controls.adresse.errors}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ville <span class="color-error">*</span></label>
+                        <input type="text" id="ville" formControlName="ville" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addClientForm.controls.ville.errors, 'is-valid': submitted &&  !addClientForm.controls.ville.errors}">
+                    </div>
+                    <div class="form-group">
+                        <label>Telephone <span class="color-error">*</span></label>
+                        <input type="text" id="telephone" formControlName="telephone" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addClientForm.controls.telephone.errors, 'is-valid': submitted &&  !addClientForm.controls.telephone.errors}">
+                        <div *ngIf="isElementNotValid('telephone')" class="invalid-feedback d-block">
+                            <small class="color-error">Telephone doit etre sur 8 chiffre</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email <span class="color-error">*</span></label>
+                        <input type="text" id="email" formControlName="email" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addClientForm.controls.email.errors, 'is-valid': submitted &&  !addClientForm.controls.email.errors}">
+                        <div *ngIf="isElementNotValid('email')" class="invalid-feedback d-block">
+                            <small class="color-error">L'email est invalide</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Tva </label>
+                        <input type="checkbox" id="tva" formControlName="tva" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label>Timbre </label>
+                        <input type="checkbox" id="timbre" formControlName="timbre" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Remise </label>
+                        <input type="checkbox" id="remise" formControlName="remise" class="form-control">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input id="close-add-modal" type="button" class="btn btn-danger" data-dismiss="modal"
+                        value="Annuler">
+                    <button *ngIf="action == 'new'" class="btn btn-info" (click)="addClient()"
+                        [disabled]="addClientForm.invalid">Ajouter</button>
+                    <button *ngIf="action == 'edit'" class="btn btn-info" (click)="editClient()"
+                        [disabled]="addClientForm.invalid">Modifier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal HTML -->
+<div id="deleteClientModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Supprimer client</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Etes-vous sûr de vouloir supprimer ce client?</p>
+                    <p class="text-warning"><small>Cette action ne peut pas être annulée.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <input id="close-delete-modal" type="button" class="btn btn-default" data-dismiss="modal"
+                        value="Annuler">
+                    <button class="btn btn-danger" (click)="deleteClient(idDelete)">Supprimer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

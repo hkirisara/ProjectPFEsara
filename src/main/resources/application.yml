@@ -1,0 +1,38 @@
+spring:
+   main:
+       allow-bean-definition-overriding: true
+   profiles:
+      active: local
+   jackson:
+     serialization:
+       fail-on-empty-beans: false
+   jpa:
+      hibernate:
+         ddl-auto: update
+         naming: 
+           physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      generate-ddl: true
+      properties:
+         hibernate:
+            show_sql: true
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+            jdbc:
+               lob:
+                  non_contextual_creation: true
+   datasource:
+      url: jdbc:postgresql://localhost:5432/mypc
+      username: postgres
+      password: p0318*
+         
+logging:
+  level:
+    java:
+      sql: OFF   
+    org:
+      hibernate: OFF  
+      
+# --- server
+server:
+  port: 9093
+  servlet:
+    context-path: /api

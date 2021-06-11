@@ -1,0 +1,401 @@
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2><b>Interventions "En Cours de Diagnostic"</b></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+    <div class="form">
+    <form class="form-validate form-horizontal " [formGroup]="addOffreForm">
+    <div class="form-group">
+        <label class="control-label col-lg-1">Client <span class="color-error">*</span></label>
+        <div class="col-lg-3">
+          <select id="client" formControlName="client" class="form-control" (ngModelChange)="onChange($event)">
+            <option [ngValue]="'tous'">Afficher Tous Client</option>
+            <option *ngFor="let option of client" [ngValue]="option.id">{{option?.raisonsocial}}</option>
+          </select>
+        </div>
+      </div>
+      </form>
+    </div>
+</div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+
+                <th>
+
+
+                </th>
+                <th>Client</th>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Marque</th>
+                <th>Modele</th>
+                <th>N/S</th>
+                <th>Panne</th>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let interoffre of intervention| paginate: { itemsPerPage: 5, currentPage: page ,totalItems:totalLength}; let i=index'>
+
+                <td>
+                    <span >
+                        <input type="radio" id="muhRadio1" class="ch-rd"  name="radiogroup" (change)="onNativeChange($event, interoffre )">
+                        <label for="muhRadio1"></label>
+                    </span>
+                </td>
+                <td>{{interoffre?.raisonsocial }}</td>
+                <td>{{interoffre?.dateajout }}</td>
+                <td>{{interoffre?.typemateriel}}</td>
+                <td>{{interoffre?.marque }}</td>
+                <td>{{interoffre?.modele}}</td>
+                <td>{{interoffre?.numserie}}</td>
+                <td>{{interoffre?.panne }}</td>
+
+
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls></div>
+
+</div>
+
+
+<div *ngIf="checked" class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2><b>Prix</b></h2>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--here -->
+
+      <div id="table" class="table-editable">
+        <table class="table table-bordered table-responsive-md table-striped text-center">
+          <tr>
+            <th>Diagnostic</th>
+            <th>Piece de Rechange</th>
+            <th>Qte</th>
+            <th *ngIf="clientOfIntervention?.tva">%TVA</th>
+            <th>PU HT</th>
+            <th *ngIf="clientOfIntervention?.remise">REMISE</th>
+            <th *ngIf="clientOfIntervention?.remise" >PU HT/R</th>
+            <th *ngIf="clientOfIntervention?.tva" >Mnt TVA</th>
+            <th>PU TTC</th>
+            <th>PT TTC</th>
+            <th></th>
+          </tr>
+          <tr *ngFor="let diag of interdiagnostic; let id = index">
+            <td>
+              <span (keyup)="changeValue(id, 'diagnostic', $event)" (blur)="updateList(id, 'diagnostic', $event)" >{{diag.diagnostic}}</span>
+            </td>
+            <td>
+              <span  (keyup)="changeValue(id, 'piecederechange', $event)" (blur)="updateList(id, 'piecederechange', $event)">{{diag.piecederechange}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(id, 'nombredepiece', $event)" (blur)="updateList(id, 'nombredepiece', $event)">{{diag.nombredepiece}}</span>
+            </td>
+            <td *ngIf="clientOfIntervention?.tva">
+              <span contenteditable="true" (keyup)="changeValue(id, 'tva', $event)" (blur)="updateList(id, 'tva', $event)">{{diag.tva}}</span>
+            </td>
+            <td>
+              <span contenteditable="true" (keyup)="changeValue(id, 'puht', $event)" (blur)="updateList(id, 'puht', $event)">{{diag.puht}}</span>
+            </td>
+            <td *ngIf="clientOfIntervention?.remise" >
+              <span contenteditable="true" (keyup)="changeValue(id, 'remise', $event)" (blur)="updateList(id, 'remise', $event)">{{diag.remise}}</span>
+            </td>
+            <td *ngIf="clientOfIntervention?.remise">
+              <span  (keyup)="changeValue(id, 'puhtr', $event)" (blur)="updateList(id, 'puhtr', $event)">{{diag.puhtr}}</span>
+            </td>
+            <td *ngIf="clientOfIntervention?.tva">
+              <span  (keyup)="changeValue(id, 'mnttva', $event)" (blur)="updateList(id, 'mnttva', $event)">{{diag.mnttva}}</span>
+            </td>
+            <td>
+              <span (keyup)="changeValue(id, 'puttc', $event)" (blur)="updateList(id, 'puttc', $event)">{{diag.puttc}}</span>
+            </td>
+            <td>
+              <span (keyup)="changeValue(id, 'ptttc', $event)" (blur)="updateList(id, 'ptttc', $event)">{{diag.ptttc}}</span>
+            </td>
+            <td>
+            <span class="table-up">
+              <a class="indigo-text">
+
+              </a>
+            </span>
+              <span class="table-down">
+              <a class="indigo-text">
+
+              </a>
+            </span>
+            </td>
+            <td>
+            <span class="table-remove">
+              <!--<i class="fa fa-check" aria-hidden="true"></i>-->
+              <button type="button"   class="btn btn-success fa fa-check" (click)="confirme(diag)"></button>
+              <button type="button"  class="btn btn-danger fa fa-window-close-o" (click)="resetOffer(diag)"></button>
+            </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+
+
+  <!-- Editable table -->
+    <div>
+        <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls></div>
+
+</div>
+
+<!-- Add Modal HTML -->
+<div id="addOffreModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="addOffreForm">
+                <div class="modal-header">
+                    <h4 class="modal-title" *ngIf="action == 'new'">Ajouter Prix </h4>
+                    <h4 class="modal-title" *ngIf="action == 'edit'">Modifier Prix </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label>Diagnostic <span class="color-error">*</span></label>
+                        <input type="text" id="diagnostic" formControlName="diagnostic" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label>Piéce de rechange <span class="color-error">*</span></label>
+                        <input type="text" id="piecederechange" formControlName="piecederechange" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label>Qte<span class="color-error">*</span></label>
+                        <input type="text" id="qte" formControlName="qte" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label>%TVA<span class="color-error">*</span></label>
+                        <input type="text" id="tva" formControlName="tva" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label>PU HT<span class="color-error">*</span></label>
+                        <input type="text" id="puht" formControlName="puht" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label>Mnt TVA<span class="color-error">*</span></label>
+                        <input type="text" id="mnttva" formControlName="mnttva" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label>PU TTC<span class="color-error">*</span></label>
+                        <input type="text" id="puttc" formControlName="puttc" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label>PT TTC<span class="color-error">*</span></label>
+                        <input type="text" id="ptttc" formControlName="ptttc" class="form-control">
+
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <input id="close-add-modal" type="button" class="btn btn-danger" data-dismiss="modal"
+                        value="Annuler">
+                    <button *ngIf="action == 'new'" class="btn btn-info" (click)="addOffre()"
+                        [disabled]="addOffreForm.invalid">Ajouter</button>
+                    <button *ngIf="action == 'edit'" class="btn btn-info" (click)="editOffre()"
+                        [disabled]="addOffreForm.invalid">Modifier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal HTML -->
+<div id="deleteOffreModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Supprimer prix</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Etes-vous sûr de vouloir supprimer cette prix?</p>
+                    <p class="text-warning"><small>Cette action ne peut pas être annulée.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <input id="close-delete-modal" type="button" class="btn btn-default" data-dismiss="modal"
+                        value="Annuler">
+                    <button class="btn btn-danger" (click)="deleteOffre(idDelete)">Supprimer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div id="invoice">
+
+    <div class="toolbar hidden-print">
+        <div class="text-right">
+            <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+            <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+        </div>
+        <hr>
+    </div>
+    <div class="invoice overflow-auto">
+        <div style="min-width: 200px">
+            <header>
+                <div class="row">
+                    <div class="col">
+
+                    </div>
+                    <div class="col company-details" style="text-align: center">
+                        <h2 class="name">
+                            <a target="_blank" href="https://lobianijs.com">
+                            Offre de Prix
+                            </a>
+                        </h2>
+                        <div>N°32021 du 05/06/2021</div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <div class="row contacts">
+                    <div class="col invoice-to">
+                        <!--<div class="text-gray-light">INVOICE TO:</div>
+                        <h2 class="to">John Doe</h2>
+                        <div class="address">796 Silver Harbour, TX 79273, US</div>
+                        <div class="email"><a href="mailto:john@example.com">john@example.com</a></div>-->
+                    </div>
+                    <div class="col invoice-details" style="text-align: center">
+                        <h1 class="invoice-id">Nom du Client</h1>
+                        <div class="date">Adresse</div>
+                        <div class="date">Tel/Fax:</div>
+                        <div class="date">Email:</div>
+                    </div>
+                </div>
+                <table border="0" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="text-left">Diagnostic</th>
+                            <th class="text-right">Qte</th>
+                            <th class="text-right">%TVA</th>
+                            <th class="text-right">MNT TVA</th>
+                            <th class="text-right">REMISE</th>
+                            <th class="text-right">PU HT/R</th>
+                            <th class="text-right">PU HT</th>
+                            <th class="text-right">PU TTC</th>
+                            <th class="text-right">PT TTC</th>
+                           <!--<th class="text-right">TIMBRE</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="no">01</td>
+                            <td class="text-left"><h3>
+                                <a target="_blank" href="https://www.youtube.com/channel/UC_UMEcP_kF0z4E6KbxCpV1w">
+                                Youtube channel
+                                </a>
+                                </h3>
+                               <a target="_blank" href="https://www.youtube.com/channel/UC_UMEcP_kF0z4E6KbxCpV1w">
+                                   Useful videos
+                               </a>
+                               to improve your Javascript skills. Subscribe and stay tuned :)
+                            </td>
+                            <td class="unit">$0.00</td>
+                            <td class="unit">100</td>
+                            <td class="unit">$0.00</td>
+                            <td class="unit">$0.00</td>
+                            <td class="unit">$0.00</td>
+                            <td class="unit">$0.00</td>
+                            <td class="unit">$0.00</td>
+                            <td class="unit">$0.00</td>
+
+                        </tr>
+                        <tr>
+                            <td class="no">02</td>
+                            <td class="text-left"><h3>Website Design</h3>Creating a recognizable design solution based on the company's existing visual identity</td>
+                            <td class="unit">$40.00</td>
+                            <td class="unit">30</td>
+                            <td class="unit">$1,200.00</td>
+                            <td class="unit">$1,200.00</td>
+                            <td class="unit">$1,200.00</td>
+                            <td class="unit">$1,200.00</td>
+                            <td class="unit">$1,200.00</td>
+                            <td class="unit">$1,200.00</td>
+                        </tr>
+
+
+                    </tbody>
+                    <tfoot >
+                        <tr >
+                            <td colspan="5"></td>
+                            <td colspan="4">TOTAL HTVA</td>
+                            <td>$5,200.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5"></td>
+                            <td colspan="4">TVA</td>
+                            <td>$1,300.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5"></td>
+                            <td colspan="4">TIMBRE</td>
+                            <td>$1,300.00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5"></td>
+                            <td colspan="4">TOT TTC</td>
+                            <td>$6,500.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="notices">
+                    <div>ARRETER LA PRESENTE OFFRE DE PRIX A:</div>
+                    <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+                </div>
+            </main>
+            <footer>
+
+            </footer>
+        </div>
+        <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+        <div></div>
+    </div>
+</div>

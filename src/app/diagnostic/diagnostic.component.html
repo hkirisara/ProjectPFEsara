@@ -1,0 +1,351 @@
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2><b>Affichage des Interventions</b></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+
+                <th>
+
+                    
+                </th>
+                <th>Client</th>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Marque</th>
+                <th>Modele</th>
+                <th>N/S</th>
+                <th>Panne</th>
+                <th>Etat</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let interdiagnostic of intervention| paginate: { itemsPerPage: 5, currentPage: page ,totalItems:totalLength}; let i=index'>
+
+                <td>
+                    <span >
+                        <input type="radio" class="ch-rd" [checked]="checked" (change)="onNativeChange($event, interdiagnostic )">
+                        <label for="muhRadio1"></label>
+                    </span>
+                </td>
+                <td>{{interdiagnostic?.raisonsocial }}</td>
+                <td>{{interdiagnostic?.dateajout }}</td>
+                <td>{{interdiagnostic?.typemateriel}}</td>
+                <td>{{interdiagnostic?.marque }}</td>
+                <td>{{interdiagnostic?.modele}}</td>
+                <td>{{interdiagnostic?.numserie}}</td>
+                <td>{{interdiagnostic?.panne }}</td>
+                <td>{{interdiagnostic?.etat}}</td>
+
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls></div>
+    
+</div>
+
+<!-- Add Modal HTML 
+<div id="addDiagnosticModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="addDiagnosticForm">
+                <div class="modal-header">
+                    <h4 class="modal-title" *ngIf="action == 'new'">Ajouter  diagnostic </h4>
+                    <h4 class="modal-title" *ngIf="action == 'edit'">Modifier diagnostic </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+               
+                <div class="modal-footer">
+                    <input id="close-add-modal" type="button" class="btn btn-default" data-dismiss="modal"
+                        value="Annuler">
+                    <button *ngIf="action == 'new'" class="btn btn-info" (click)="addDiagnostic()"
+                        [disabled]="addDiagnosticForm.invalid">Ajouter</button>
+                    <button *ngIf="action == 'edit'" class="btn btn-info" (click)="editDiagnostic()"
+                        [disabled]="addDiagnosticForm.invalid">Modifier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>-->
+
+<!-- Delete Modal HTML 
+<div id="deleteDiagnosticModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Supprimer diagnostic</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Etes-vous sûr de vouloir supprimer cette diagnostic?</p>
+                    <p class="text-warning"><small>Cette action ne peut pas être annulée.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <input id="close-delete-modal" type="button" class="btn btn-default" data-dismiss="modal"
+                        value="Annuler">
+                    <button class="btn btn-danger" (click)="deleteDiagnostic(idDelete)">Supprimer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>-->
+
+<div class="container-xl" *ngIf="diagnostics != null">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2><b>Affichage des Diagnostic</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="#addDiagnosticModal" class="btn btn-info" data-toggle="modal" (click)="openPopup()">
+                            <i class="material-icons">&#xE147;</i> <span>Ajouter Diagnostic</span></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+
+                <th>
+
+                 <!--   <span class="custom-checkbox">
+                        <input type="checkbox" id="selectAll" (change)="checkAllDiac($event)">
+                        <label for="selectAll"></label>
+                    </span> -->
+                </th>
+                <th>Date</th>
+                <th>Diagnostic</th>
+                <th>Piéce de rechange</th>
+                <th>Nombre de piéce</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let diagnostic of diagnostics | paginate: { itemsPerPage: 3, currentPage: page ,totalItems:totalLength}; let i=index'>
+                <td>
+                 <!--   <span class="custom-checkbox">
+                        <input type="checkbox" [checked]="checkedDiac"
+                            (change)="onNativeChangeDiac($event, diagnostic)">
+                        <label for="checkbox"></label>
+                    </span> -->
+                </td>
+                <td>{{diagnostic?.datediagnostic }}</td>
+                <td>{{diagnostic?.diagnostic}}</td>
+                <td>{{diagnostic?.piecederechange }}</td>
+                <td>{{diagnostic?.nombredepiece}}</td>
+
+                
+                <td>
+                    <a href="#addDiagnosticModal" class="edit" data-toggle="modal" tva="button"
+                        (click)="moveDataToModifForm(i)"><i class="material-icons" data-toggle="tooltip"
+                            title="Modifier">&#xE254;</i></a>
+
+                    <a href="#deleteDiagnosticModal" class="delete" data-toggle="modal" tva="button"
+                        (click)="moveIDToDeleteForm(i)"><i class="material-icons" data-toggle="tooltip"
+                            title="Supprimer">&#xE872;</i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls></div>
+    
+</div>
+
+<!-- Add Modal HTML -->
+<div id="addDiagnosticModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="addDiagnosticForm">
+                <div class="modal-header">
+                    <h4 class="modal-title" *ngIf="action == 'new'">Ajouter diagnostic </h4>
+                    <h4 class="modal-title" *ngIf="action == 'edit'">Modifier diagnostic </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Date <span class="color-error">*</span></label>
+                        <input id="datediagnostic" value="{{datediagnostic|date:'dd/MM/yyyy, hh:mm '}}"
+                            formControlName="datediagnostic" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label>Diagnostic <span class="color-error">*</span></label>
+                        <input type="text" id="diagnostic" formControlName="diagnostic" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label>Piéce de rechange <span class="color-error">*</span></label>
+                        <input type="text" id="piecederechange" formControlName="piecederechange" class="form-control">
+
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre de piéce <span class="color-error">*</span></label>
+                        <input type="text" id="nombredepiece" formControlName="nombredepiece" class="form-control">
+
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <input id="close-add-modal" type="button" class="btn btn-danger" data-dismiss="modal"
+                        value="Annuler">
+                    <button *ngIf="action == 'new'" class="btn btn-info" (click)="addDiagnostic()"
+                        [disabled]="addDiagnosticForm.invalid">Ajouter</button>
+                    <button *ngIf="action == 'edit'" class="btn btn-info" (click)="editDiagnostic()"
+                        [disabled]="addDiagnosticForm.invalid">Modifier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal HTML -->
+<div id="deleteDiagnosticModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Supprimer diagnostic</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Etes-vous sûr de vouloir supprimer cette diagnostic?</p>
+                    <p class="text-warning"><small>Cette action ne peut pas être annulée.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <input id="close-delete-modal" type="button" class="btn btn-default" data-dismiss="modal"
+                        value="Annuler">
+                    <button class="btn btn-danger" (click)="deleteDiagnostic(idDelete)">Supprimer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<!-- Add Modal HTML 
+<div id="addMouvementModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="addMouvementForm">
+                <div class="modal-header">
+                    <h4 class="modal-title" *ngIf="action == 'new'">Ajouter  Mouvement </h4>
+                    <h4 class="modal-title" *ngIf="action == 'edit'">Modifier Mouvement </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="form-group">
+                        <label>Réceptionné <span class="color-error">*</span></label>
+                        <input type="datetime-local" id="receptionne" formControlName="receptionne" class="form-control" >
+                           
+                    </div>
+                    <div class="form-group">
+                        <label>Diagnostiqué <span class="color-error">*</span></label>
+                        <input type="datetime-local" id="diagnostique" formControlName="diagnostique" class="form-control" >
+                           
+                    </div>
+                    <div class="form-group">
+                        <label>Soumission d'offre <span class="color-error">*</span></label>
+                        <input type="datetime-local" id="soumissionoffre" formControlName="soumissionoffre" class="form-control" >
+                           
+                    </div>
+                    <div class="form-group">
+                        <label>Refus <span class="color-error">*</span></label>
+                        <input type="datetime-local" id="refus" formControlName="refus" class="form-control" >
+                           
+                    </div>
+                    <div class="form-group">
+                        <label>En attente de piéce <span class="color-error">*</span></label>
+                        <input type="datetime-local" id="attpiece" formControlName="attpiece" class="form-control" >
+                           
+                    </div>
+                    <div class="form-group">
+                        <label>Réparé <span class="color-error">*</span></label>
+                        <input type="datetime-local" id="repare" formControlName="repare" class="form-control" >
+                           
+                    </div>
+                    <div class="form-group">
+                        <label>En attente de Livraison <span class="color-error">*</span></label>
+                        <input type="datetime-local" id="attlivraison" formControlName="attlivraison" class="form-control" >
+                           
+                    </div>
+                    <div class="form-group">
+                        <label>Livrée <span class="color-error">*</span></label>
+                        <input type="datetime-local" id="livree" formControlName="livree" class="form-control" >
+                           
+                    </div>
+                   
+                    
+                  
+
+                </div>
+                <div class="modal-footer">
+                    <input id="close-add-modal" type="button" class="btn btn-default" data-dismiss="modal"
+                        value="Annuler">
+                    <button *ngIf="action == 'new'" class="btn btn-info" (click)="addMouvement()"
+                        [disabled]="addMouvementForm.invalid">Ajouter</button>
+                    <button *ngIf="action == 'edit'" class="btn btn-info" (click)="editMouvement()"
+                        [disabled]="addMouvementForm.invalid">Modifier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>-->
+
+<!-- Delete Modal HTML 
+<div id="deleteMouvementModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Supprimer Mouvement</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Etes-vous sûr de vouloir supprimer cette Mouvement?</p>
+                    <p class="text-warning"><small>Cette action ne peut pas être annulée.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <input id="close-delete-modal" type="button" class="btn btn-default" data-dismiss="modal"
+                        value="Annuler">
+                    <button class="btn btn-danger" (click)="deleteMouvement(idDelete)">Supprimer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+

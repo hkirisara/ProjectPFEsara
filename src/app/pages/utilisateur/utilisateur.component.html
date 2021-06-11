@@ -1,0 +1,171 @@
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2><b>Gestion des Utilisateurs</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="#addUtilisateurModal" class="btn btn-info" data-toggle="modal" (click)="openPopup()">
+                            <i class="material-icons">&#xE147;</i> <span></span></a>
+                        <div class="search-box">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                                <input type="text" [(ngModel)]="prenom" (input)="search()" class="form-control"
+                                    placeholder="Search&hellip;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+
+                        <th>
+                           
+                        </th>
+                        <th>Cin</th>
+                        <th>Prenom</th>
+                        <th>Nom</th>
+                        <th>Telephone</th>
+                        <th>Certification</th>
+                        <th>Adresse</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let u of utilisateur; let i=index'>
+
+                        <td>
+                            
+                        </td>
+                        <td>{{u.cin }}</td>
+                        <td>{{u.prenom }}</td>
+                        <td>{{u.nom }}</td>
+                        <td>{{u.telephone }}</td>
+                        <td>{{u.certification }}</td>
+                        <td>{{u.adresse }}</td>
+                        <td>{{u.email }}</td>
+                        <td>{{u.role }}</td>
+                        <td>
+                            <a href="#addUtilisateurModal" class="edit" data-toggle="modal" role="button"
+                                (click)="moveDataToModifForm(i)"><i class="material-icons" data-toggle="tooltip"
+                                    title="Modifier">&#xE254;</i></a>
+
+                            <a href="#deleteUtilisateurModal" class="delete" data-toggle="modal" role="button"
+                                (click)="moveIDToDeleteForm(i)"><i class="material-icons" data-toggle="tooltip"
+                                    title="Supprimer">&#xE872;</i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>
+<!-- Add Modal HTML -->
+<div id="addUtilisateurModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="addUtilisateurForm">
+                <div class="modal-header">
+                    <h4 class="modal-title" *ngIf="action == 'new'">Ajouter Utilisateur </h4>
+                    <h4 class="modal-title" *ngIf="action == 'edit'">Modifier Utilisateur </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Cin <span class="color-error">*</span></label>
+                        <input type="text" id="cin" formControlName="cin" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addUtilisateurForm.controls.cin.errors, 'is-valid': submitted &&  !addUtilisateurForm.controls.cin.errors}">
+                        <div *ngIf="isElementNotValid('cin')" class="invalid-feedback d-block">
+                            <small class="color-error">Cin doit etre sur 8 chiffre</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Prenom <span class="color-error">*</span></label>
+                        <input type="text" id="prenom" formControlName="prenom" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addUtilisateurForm.controls.prenom.errors, 'is-valid': submitted &&  !addUtilisateurForm.controls.prenom.errors}">
+                    </div>
+                    <div class="form-group">
+                        <label>Nom <span class="color-error">*</span></label>
+                        <input type="text" id="nom" formControlName="nom" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addUtilisateurForm.controls.nom.errors, 'is-valid': submitted &&  !addUtilisateurForm.controls.nom.errors}">
+                    </div>
+                    <div class="form-group">
+                        <label>Telephone <span class="color-error">*</span></label>
+                        <input type="text" id="telephone" formControlName="telephone" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addUtilisateurForm.controls.telephone.errors, 'is-valid': submitted &&  !addUtilisateurForm.controls.telephone.errors}">
+                        <div *ngIf="isElementNotValid('telephone')" class="invalid-feedback d-block">
+                            <small class="color-error">Telephone doit etre sur 8 chiffre</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Certification <span class="color-error">*</span></label>
+                        <input type="text" id="certification" formControlName="certification" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addUtilisateurForm.controls.certification.errors, 'is-valid': submitted &&  !addUtilisateurForm.controls.certification.errors}">
+                    </div>
+                    <div class="form-group">
+                        <label>Adresse <span class="color-error">*</span></label>
+                        <input type="text" id="adresse" formControlName="adresse" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addUtilisateurForm.controls.adresse.errors, 'is-valid': submitted &&  !addUtilisateurForm.controls.adresse.errors}">
+                    </div>
+                    <div class="form-group">
+                        <label>Email <span class="color-error">*</span></label>
+                        <input type="text" id="email" formControlName="email" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addUtilisateurForm.controls.email.errors, 'is-valid': submitted &&  !addUtilisateurForm.controls.email.errors}">
+                        <div *ngIf="isElementNotValid('email')" class="invalid-feedback d-block">
+                            <small class="color-error">L'email est invalide</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Role <span class="color-error">*</span></label>
+                        <select id="role" formControlName="role" class="form-control">
+                            <option >Administrateur </option>
+                            <option >Ingénieur </option>
+                            <option >Technicien </option>
+                            <option >Responsable </option>
+                            <option >Coursier </option>
+                           
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input id="close-add-modal" type="button" class="btn btn-danger" data-dismiss="modal"
+                        value="Annuler">
+                    <button *ngIf="action == 'new'" class="btn btn-info" (click)="addUtilisateur()"
+                        [disabled]="addUtilisateurForm.invalid">Ajouter</button>
+                    <button *ngIf="action == 'edit'" class="btn btn-info" (click)="editUtilisateur()"
+                        [disabled]="addUtilisateurForm.invalid">Modifier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal HTML -->
+<div id="deleteUtilisateurModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Supprimer utilisateur</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Etes-vous sûr de vouloir supprimer ce utilisateur?</p>
+                    <p class="text-warning"><small>Cette action ne peut pas être annulée.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <input id="close-delete-modal" type="button" class="btn btn-default" data-dismiss="modal"
+                        value="Annuler">
+                    <button class="btn btn-danger" (click)="deleteUtilisateur(idDelete)">Supprimer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

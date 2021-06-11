@@ -1,0 +1,141 @@
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2><b>Affectation des techniciens</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="#addAffectationsModal" class="btn btn-info" data-toggle="modal" (click)="openPopup()">
+                            <i class="material-icons">&#xE147;</i> <span>Affecter un Technicien</span></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+
+                <th>
+                    <span class="custom-checkbox">
+                        <input type="checkbox" id="selectAll" (change)="checkAll($event)">
+                        <label for="selectAll"></label>
+                    </span>
+
+                </th>
+                
+                <th>Client</th>
+                <th>Type</th>
+                <th>Marque</th>
+                <th>Modele</th>
+                <th>N/S</th>
+                <th>Panne</th>
+                <th>Etat</th>
+                <th>Technicien</th>
+                <th>Action</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let affectation of intervention|paginate: {itemsPerPage:50,currentPage:p}; let i=index'>
+
+                <td>
+                    <span class="custom-checkbox">
+                        <input type="checkbox" [checked]="checked" value="{{affectation?.id }}" class="ch-inter" (change)="onNativeChange($event, affectation)">
+                        <label for="checkbox"></label>
+                    </span>
+                </td>
+                <td>{{affectation?.raisonsocial }}</td>
+                <td>{{affectation?.typemateriel }}</td>
+                <td>{{affectation?.marque }}</td>
+                <td>{{affectation?.modele }}</td>
+                <td>{{affectation?.numserie }}</td>
+                <td>{{affectation?.panne }}</td>
+                <td>{{affectation?.etat }}</td>
+                <td>{{affectation?.technicien}}</td>
+
+
+
+
+
+
+                <td>
+                    <a href="#addAffectationsModal" class="edit" data-toggle="modal" tva="button"
+                        (click)="moveDataToModifForm(i)"><i class="material-icons" data-toggle="tooltip"
+                            title="Modifier">&#xE254;</i></a>
+
+                    <a href="#deleteAffectationsModal" class="delete" data-toggle="modal" tva="button"
+                        (click)="moveIDToDeleteForm(i)"><i class="material-icons" data-toggle="tooltip"
+                            title="Supprimer">&#xE872;</i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+   
+    <div >
+        <pagination-controls previousLabel="Précédent" nextLabel="Suivant"(pageChange) = "p = $event"></pagination-controls>
+    </div>
+</div>
+
+<!-- Add Modal HTML -->
+<div id="addAffectationsModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="addAffectationsForm">
+                <div class="modal-header">
+                    <h4 class="modal-title" *ngIf="action == 'new'">Ajouter affectation </h4>
+                    <h4 class="modal-title" *ngIf="action == 'edit'">Modifier affectation </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Technicien <span class="color-error">*</span></label>
+                        <select id="technicien" formControlName="technicien" class="form-control">
+                            <option *ngFor="let option of utilisateur" [ngValue]="option">{{option?.nom}} {{option?.prenom}}
+                            </option>
+                        </select>
+                    </div>
+                   
+                    
+                  
+
+                </div>
+                <div class="modal-footer">
+                    <input id="close-add-modal" type="button" class="btn btn-danger" data-dismiss="modal"
+                        value="Annuler">
+                    <button *ngIf="action == 'new'" class="btn btn-info" (click)="addAffectation()"
+                        [disabled]="addAffectationsForm.invalid">Ajouter</button>
+                    <button *ngIf="action == 'edit'" class="btn btn-info" (click)="editAffectation()"
+                        [disabled]="addAffectationsForm.invalid">Modifier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal HTML -->
+<div id="deleteAffectationsModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Supprimer affectation</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Etes-vous sûr de vouloir supprimer cette affectation?</p>
+                    <p class="text-warning"><small>Cette action ne peut pas être annulée.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <input id="close-delete-modal" type="button" class="btn btn-default" data-dismiss="modal"
+                        value="Annuler">
+                    <button class="btn btn-danger" (click)="deleteAffectation(idDelete)">Supprimer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

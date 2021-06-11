@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-lg-4">
+    <section class="panel">
+      <header class="panel-heading" align-text="center">
+        AJOUTER UNE INTERVENTION
+      </header>
+      <div class="panel-body">
+        <div class="form">
+          <form class="form-validate form-horizontal " [formGroup]="addInterventionsForm">
+            <div class="form-group">
+              <label class="control-label col-lg-2"> Client <span class="color-error">*</span></label>
+              <div class="col-lg-10">
+                <select id="client" formControlName="client" class="form-control">
+                  <option *ngFor="let option of client" [ngValue]="option">{{option?.raisonsocial}}</option>
+                </select>
+              </div>
+            </div>
+            <!--<select id="typemateriel" formControlName="typemateriel" class="form-control" #mySelect
+                  (change)='onSelecteType(mySelect.value)'>-->
+            <div class="form-group">
+              <label class="control-label col-lg-2">Type <span class="color-error">*</span></label>
+              <div class="col-lg-10">
+                <select id="typemateriel" formControlName="typemateriel" class="form-control"
+                #mySelect
+                  (change)='onSelecteType(mySelect.value)'>
+                  <option *ngFor="let option of typemateriel" [ngValue]="option">{{option?.typemateriel}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-2">Marque <span class="color-error">*</span></label>
+              <div class="col-lg-10">
+                <select id="marque" formControlName="marque" class="form-control"
+                #mySelect
+                  (change)='onSelecteMarque(mySelect.value)'>
+                  <option *ngFor="let option of marque" [ngValue]="option">{{option?.marque}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-2">modele <span class="color-error">*</span></label>
+              <div class="col-lg-10">
+                <input type="text" id="modele" formControlName="modele" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-2">N°Serie <span class="color-error"></span></label>
+              <div class="col-lg-10">
+                <input type="text" id="numserie" formControlName="numserie" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-2">Affectaion <span class="color-error"></span></label>
+              <div class="col-lg-10">
+                <input type="text" id="affect" formControlName="affect" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-2">Panne <span class="color-error"></span></label>
+              <div class="col-lg-10">
+                <textarea type="text" id="panne" formControlName="panne" class="form-control"></textarea>
+              </div>
+            </div>
+           <div class="form-group">
+             <label class="control-label col-lg-2">Etat <span class="color-error"></span></label>
+              <div class="col-lg-10">
+                <input type="text" value="ajouté" id="etat" formControlName="etat" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-lg-2">Date <span class="color-error">*</span></label>
+              <div class="col-lg-10">
+              <input id="dateajout" value="{{dateajout|date:'dd/MM/yyyy, hh:mm '}}"
+                  formControlName="dateajout" class="form-control" >
+                </div>
+          </div>
+
+            <div class="form-group">
+              <div class="col-lg-offset-2 col-lg-10">
+                <button class="btn btn-default" type="button" class="btn btn-danger"
+                  style="margin:5px;">Annuler</button>
+
+                <button class="btn btn-primary" type="submit" (click)="addIntervention()">Enregistrer</button>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
