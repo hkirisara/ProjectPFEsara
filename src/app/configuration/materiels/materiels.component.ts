@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { MarqueService } from '../service/marque.service';
-import { MaterielsService } from '../service/materiels.service';
-import { TypematerielService } from '../service/typemateriel.service';
+import { MarqueService } from 'src/app/service/marque.service';
+import { MaterielsService } from 'src/app/service/materiels.service';
+import { TypematerielService } from 'src/app/service/typemateriel.service';
+
 
 @Component({
   selector: 'app-materiels',

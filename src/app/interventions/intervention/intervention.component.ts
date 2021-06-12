@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { ClientService } from '../service/client.service';
-import { InterventionService } from '../service/intervention.service';
-import { MarqueService } from '../service/marque.service';
-import { TypematerielService } from '../service/typemateriel.service';
+import { ClientService } from 'src/app/service/client.service';
+import { InterventionService } from 'src/app/service/intervention.service';
+import { MarqueService } from 'src/app/service/marque.service';
+import { TypematerielService } from 'src/app/service/typemateriel.service';
+
 
 @Component({
   selector: 'app-intervention',

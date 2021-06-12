@@ -3,10 +3,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AffectationService } from '../service/affectation.service';
-import { DiagnosticService } from '../service/diagnostic.service';
-import { InterventionService } from '../service/intervention.service';
-import { UtilisateurService } from '../service/utilisateur.service';
+import { DiagnosticService } from 'src/app/service/diagnostic.service';
+import { InterventionService } from 'src/app/service/intervention.service';
+
 
 @Component({
   selector: 'app-diagnostic',

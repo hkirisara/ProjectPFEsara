@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AffectationtechnicienComponent } from './affectationtechnicien/affectationtechnicien.component';
-import { AjoutComponent } from './ajout/ajout.component';
-import { ClientComponent } from './client/client.component';
+import { AffectationtechnicienComponent } from './interventions/affectationtechnicien/affectationtechnicien.component';
+import { AjoutComponent } from './interventions/ajout/ajout.component';
+import { ClientComponent } from './configuration/client/client.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DiagnosticComponent } from './diagnostic/diagnostic.component';
+import { DiagnosticComponent } from './interventions/diagnostic/diagnostic.component';
 import { OffreComponent } from './finance/offre/offre.component';
-import { InterventionComponent } from './intervention/intervention.component';
-import { MaterielsComponent } from './materiels/materiels.component';
-import { MarqueComponent } from './pages/marque/marque.component';
-import { MouvementComponent } from './pages/mouvement/mouvement.component';
-import { TypematerielComponent } from './pages/typemateriel/typemateriel.component';
-import { UtilisateurComponent } from './pages/utilisateur/utilisateur.component';
+import { InterventionComponent } from './interventions/intervention/intervention.component';
+import { MaterielsComponent } from './configuration/materiels/materiels.component';
+import { MarqueComponent } from './configuration/marque/marque.component';
+import { MouvementComponent } from './interventions/mouvement/mouvement.component';
+import { TypematerielComponent } from './configuration/typemateriel/typemateriel.component';
+import { UtilisateurComponent } from './configuration/utilisateur/utilisateur.component';
 
 
 
