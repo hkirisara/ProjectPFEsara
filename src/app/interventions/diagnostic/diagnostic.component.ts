@@ -58,6 +58,7 @@ export class DiagnosticComponent implements OnInit {
         this.diagnostic[i].datediagnostic = new Date(this.diagnostic[i].datediagnostic).toLocaleString()
       }
     });
+    
     /*this.diagnosticService.getDiagnosticByInterventionId(this.interventionId)*/
     this.interventionService.getAllIntervention().subscribe((data) => {
       this.intervention = this.intiTable(data).filter(item => item.etat === "ajouté");
@@ -65,9 +66,9 @@ export class DiagnosticComponent implements OnInit {
         this.intervention[i].dateajout = new Date(this.intervention[i].dateajout).toLocaleString()
       }
     });
-
-
   }
+
+  
   private intiTable(data) {
     let result: any[] = [];
     if (data) {
@@ -93,12 +94,15 @@ export class DiagnosticComponent implements OnInit {
     if (this.addDiagnosticForm.valid) {
       let diagnostic = this.addDiagnosticForm.value;
       this.diagnosticService.addDiagnostic(this.interventionId, diagnostic).subscribe((data) => {
-        this.getdiagnosticFromService();
+        console.log(data)
         document.getElementById("close-add-modal").click();
         this.toastr.success('Diagnostic ajouté avec succés');
+        
         this.addDiagnosticForm.reset();
-      }
-      )
+        diagnostic.datediagnostic = new Date(diagnostic.datediagnostic).toLocaleString()
+        diagnostic["id"] = data["id"]
+        this.diagnostics.push(diagnostic)
+      })
     }
   }
   
@@ -194,10 +198,11 @@ export class DiagnosticComponent implements OnInit {
   }
   // copy des données à modifer dans le form du modification
   public moveDataToModifForm(index: any) {
+    console.log(index)
     this.action = "edit";
     //moveDataToModifForm
-    let currentdiagnostic = this.diagnostic[index];
-    this.idEdit = this.diagnostic[index].id;
+    let currentdiagnostic = this.diagnostics[index];
+    this.idEdit = this.diagnostics[index].id;
     //  mettre les valeurs de l'objet < currentclient > dans les champs du formulaire edit 
     this.addDiagnosticForm.patchValue(currentdiagnostic);
   }

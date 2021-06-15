@@ -77,7 +77,7 @@ export class AffectationtechnicienComponent implements OnInit {
           panne: element.panne,
           etat: element.etat,
           // technicien: element.utilisateur ? element.utilisateur.prenom + " " + element.utilisateur.nom : null
-          technicien:element.affect
+          technicien:element.affectTo
         });
         //});
         //}

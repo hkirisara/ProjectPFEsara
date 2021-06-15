@@ -89,10 +89,10 @@
                     </div>
                     <div class="form-group">
                         <label>Date <span class="color-error">*</span></label>
-                        <div class="col-lg-10">
+                        
                         <input id="dateajout" value="{{dateajout|date:'dd/MM/yyyy, hh:mm '}}"
                             formControlName="dateajout" class="form-control" >
-                          </div>
+                          
                     </div>
                     <div class="form-group">
                         <label>Type <span class="color-error">*</span></label>
@@ -128,9 +128,13 @@
                             [ngClass]="{'is-invalid': submitted && addInterventionsForm.controls.panne.errors, 'is-valid': submitted &&  !addInterventionsForm.controls.panne.errors}"></textarea>
                     </div>
                     <div class="form-group">
-                        <label>etat <span class="color-error">*</span></label>
-                        <input type="text" id="etat"  formControlName="etat" class="form-control" >
-                           
+                        <label>Etat <span class="color-error">*</span></label>
+                        <select id="etat" formControlName="etat" class="form-control">
+                            <option >Ajouté</option>
+                            <option >Facturé</option>
+                            <option >Livré</option>
+
+                        </select>
                     </div>
                   
 

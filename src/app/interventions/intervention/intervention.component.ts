@@ -32,6 +32,7 @@ export class InterventionComponent implements OnInit {
   page:number=1;
   result:any;
  public dateajout = Date.now();
+ public dataEdit: any
   
   constructor(private fb: FormBuilder,
     private toastr: ToastrService,
@@ -85,6 +86,8 @@ export class InterventionComponent implements OnInit {
     this.idEdit = this.interventions [index].id;
     //  mettre les valeurs de l'objet < currentclient > dans les champs du formulaire edit 
     this.addInterventionsForm.patchValue(currentinterventions);
+    this.dataEdit = this.addInterventionsForm.value
+    console.log(this.dataEdit)
   }
 
   /* fonction click editclient */
@@ -95,6 +98,7 @@ export class InterventionComponent implements OnInit {
           this.getinterventionsFromService();
           document.getElementById("close-add-modal").click();
           this.toastr.success('Intervention modifé avec succés');
+          console.log( this.addInterventionsForm.value)
         }
       )
   }

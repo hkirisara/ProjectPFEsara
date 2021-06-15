@@ -36,4 +36,8 @@ export class OffreService {
     
 
   }
+
+  getOffreByInterventionId(id: any) {
+    return this.httpClient.get(`${this.offreUrl}/intervention/${id}`);
+  }
 }

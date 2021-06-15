@@ -37,4 +37,7 @@ export class ClientService {
 
   }
 
+  getAllClientBYInterventionHasDiagno() {
+    return this.httpClient.get(`${this.clientUrl}/interventions/diagno`);
+  }
 }

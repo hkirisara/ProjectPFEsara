@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   public action: string;
   public prenom: any;
   public nom: any;
-  public checked: boolean ;
+  //public checked: boolean ;
   //public checkedDiac: boolean = false;
   //public checkedMvmt : boolean = false;
   public array: any[] = [];
@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit {
     page:number=1;
     result:any;
    public datediagnostic = Date.now();
+   public dateajout = Date.now();
 
   constructor(private fb: FormBuilder,
     private toastr: ToastrService,
@@ -61,6 +62,15 @@ export class DashboardComponent implements OnInit {
       this.intervention = this.intiTable(data).filter(item => item.etat === "ajouté");
       for (let i=0; i<this.intervention.length; i++) {
         this.intervention[i].dateajout = new Date(this.intervention[i].dateajout).toLocaleString()
+      }
+    });
+
+    this.interventionService.getInterventionById(this.id).subscribe((data) =>{
+      this.intervention = data
+      for(let i=0; i<this.diagnostic.length; i++){
+        this.diagnostic[i].datediagnostic = new Date(this.diagnostic[i].datediagnostic).toLocaleString()
+        this.intervention[i].dateajout = new Date(this.intervention[i].dateajout).toLocaleString()
+        
       }
     });
 
@@ -100,7 +110,7 @@ export class DashboardComponent implements OnInit {
     }
   }
   
-  public onNativeChange(event, data) {
+  public onNativeChange(event, data, elem) {
     if (event.target.checked) {
       this.array.push(data);
       this.interventionId = data.id;
@@ -108,11 +118,28 @@ export class DashboardComponent implements OnInit {
       this.array = this.array.filter(item => item.id !== data.id);
       
     }
-    /*let elems = Array.from(document.getElementsByClassName("ch-rd"))
+
+    //console.log(event.target)
+
+    let elems = Array.from(document.getElementsByClassName("ch-rd"))
     for(let i=0; i< elems.length; i++){
+
       elems[i].checked = false
-    }*/
-    let res = []
+    }
+
+    this.interventionService.getInterventionById(data.id).subscribe((res)=>{
+      this.mouvement = res
+      
+      this.mouvement.dateajout = new Date(this.mouvement.dateajout).toLocaleString()
+      if( this.mouvement.datediagnostic != null){
+        this.mouvement.datediagnostic = new Date(this.mouvement.datediagnostic).toLocaleString()
+      }
+      if( this.mouvement.dateOffre != null){
+        this.mouvement.dateOffre = new Date(this.mouvement.dateOffre).toLocaleString()
+      }
+      console.log(res)
+    })
+    /*let res = []
     this.diagnostics = null
     let item = null
     this.diagnostic.forEach((element: any) => {
@@ -128,10 +155,10 @@ export class DashboardComponent implements OnInit {
       this.mouvement[0]={}
       if(this.diagnostics.length==1){
         this.mouvement = this.diagnostics
-        this.mouvement[0]["date_diagno"] = this.diagnostics[0].datediagnostic
+        this.mouvement[0]["datediagnostic"] = this.diagnostics[0].datediagnostic
       }
-      this.mouvement[0]["date_interv"] = data.date
-    }
+      this.mouvement[0]["dateajout"] = this.intervention[0].dateajout
+    }*/
     return
   }
 
@@ -152,7 +179,7 @@ export class DashboardComponent implements OnInit {
     }
   }*/
 
-  public checkAll(event) {
+  /*public checkAll(event) {
     this.array = [];
     if (event.target.checked) {
       this.checked = true;
@@ -162,7 +189,7 @@ export class DashboardComponent implements OnInit {
     } else {
       this.checked = false;
     }
-  }
+  }*/
 
   /*public checkAllDiac(event) {
     this.arrayDiac = [];
@@ -245,6 +272,7 @@ export class DashboardComponent implements OnInit {
   private initForm(): void {
     this.addDiagnosticForm = this.fb.group({
       datediagnostic: [Date.now()],
+      dateajout: [Date.now()],
       diagnostic: [null, [Validators.required]],
       piecederechange: [null],
       nombredepiece: [null, [Validators.required]],

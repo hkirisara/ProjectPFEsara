@@ -47,4 +47,11 @@ export class MaterielsService {
 
   }
 
+  getMatrielByType(id: any) {
+    return this.httpClient.get(`${this.materielsUrl}/marque/${id}`);
+  }
+
+  getMatrielByMarque(id: any) {
+    return this.httpClient.get(`${this.materielsUrl}/modele/${id}`);
+  }
 }

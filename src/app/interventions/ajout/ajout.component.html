@@ -41,7 +41,10 @@
             <div class="form-group">
               <label class="control-label col-lg-2">modele <span class="color-error">*</span></label>
               <div class="col-lg-10">
-                <input type="text" id="modele" formControlName="modele" class="form-control">
+                <select id="modele" formControlName="modele" class="form-control">
+                  <option *ngFor="let option of model" [ngValue]="option">{{option}}</option>
+                </select>
+                <!--<input type="text" id="modele" formControlName="modele" class="form-control">-->
               </div>
             </div>
             <div class="form-group">
@@ -62,12 +65,7 @@
                 <textarea type="text" id="panne" formControlName="panne" class="form-control"></textarea>
               </div>
             </div>
-           <div class="form-group">
-             <label class="control-label col-lg-2">Etat <span class="color-error"></span></label>
-              <div class="col-lg-10">
-                <input type="text" value="ajouté" id="etat" formControlName="etat" class="form-control">
-              </div>
-            </div>
+           
             <div class="form-group">
               <label class="control-label col-lg-2">Date <span class="color-error">*</span></label>
               <div class="col-lg-10">

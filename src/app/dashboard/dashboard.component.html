@@ -36,7 +36,7 @@
 
                 <td>
                     <span >
-                        <input type="radio" class="ch-rd" [checked]="checked" (change)="onNativeChange($event, interdiagnostic )">
+                        <input type="radio" name="inter" class="ch-rd" [checked]="checked" (change)="onNativeChange($event, interdiagnostic, this)">
                         <label for="muhRadio1"></label>
                     </span>
                 </td>
@@ -96,18 +96,18 @@
             </tr>
         </thead>
         <tbody *ngIf="mouvement != null">
-            <tr *ngFor='let mouvement of mouvement| paginate: { itemsPerPage: 3, currentPage: page ,totalItems:totalLength}; let i=index'>
-
+            <!--<tr *ngFor='let mouvement of intervention| paginate: { itemsPerPage: 6, currentPage: page ,totalItems:totalLength}; let i=index'>
+            --><tr>
                 <td>
-                    <span class="custom-checkbox">
+                   <!--  <span class="custom-checkbox">
                         <input type="checkbox" [checked]="checkedMvmt"
                             (change)="onNativeChangeMvmt($event, mouvement)">
                         <label for="checkbox"></label>
-                    </span>
+                    </span>-->
                 </td>
-                <td>{{mouvement?.date_interv }}</td>
-                <td>{{mouvement?.date_diagno}}</td> 
-                <td>{{mouvement?.soumissionoffre }}</td>
+                <td>{{mouvement?.dateajout }}</td>
+                <td>{{mouvement?.datediagnostic}}</td> 
+                <td>{{mouvement?.dateOffre }}</td>
                 <td>{{mouvement?.refus}}</td>
                 <td>{{mouvement?.attpiece}}</td>
                 <td>{{mouvement?.repare }}</td>
@@ -118,15 +118,7 @@
 
 
 
-                <td>
-                    <a href="#addMouvementModal" class="edit" data-toggle="modal" tva="button"
-                        (click)="moveDataToModifForm(i)"><i class="material-icons" data-toggle="tooltip"
-                            title="Modifier">&#xE254;</i></a>
-
-                    <a href="#deleteMouvementModal" class="delete" data-toggle="modal" tva="button"
-                        (click)="moveIDToDeleteForm(i)"><i class="material-icons" data-toggle="tooltip"
-                            title="Supprimer">&#xE872;</i></a>
-                </td>
+               
             </tr>
         </tbody>
     </table>

@@ -75,7 +75,7 @@
 </div>
 
 
-<div *ngIf="checked" class="container-xl">
+<div *ngIf="checked " class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
@@ -116,7 +116,7 @@
               <span  (keyup)="changeValue(id, 'piecederechange', $event)" (blur)="updateList(id, 'piecederechange', $event)">{{diag.piecederechange}}</span>
             </td>
             <td>
-              <span contenteditable="true" (keyup)="changeValue(id, 'nombredepiece', $event)" (blur)="updateList(id, 'nombredepiece', $event)">{{diag.nombredepiece}}</span>
+              <span  (keyup)="changeValue(id, 'nombredepiece', $event)" (blur)="updateList(id, 'nombredepiece', $event)">{{diag.nombredepiece}}</span>
             </td>
             <td *ngIf="clientOfIntervention?.tva">
               <span contenteditable="true" (keyup)="changeValue(id, 'tva', $event)" (blur)="updateList(id, 'tva', $event)">{{diag.tva}}</span>
@@ -142,12 +142,10 @@
             <td>
             <span class="table-up">
               <a class="indigo-text">
-
               </a>
             </span>
               <span class="table-down">
               <a class="indigo-text">
-
               </a>
             </span>
             </td>
@@ -155,7 +153,7 @@
             <span class="table-remove">
               <!--<i class="fa fa-check" aria-hidden="true"></i>-->
               <button type="button"   class="btn btn-success fa fa-check" (click)="confirme(diag)"></button>
-              <button type="button"  class="btn btn-danger fa fa-window-close-o" (click)="resetOffer(diag)"></button>
+              <button type="button"  class="btn btn-danger fa fa-window-close-o" (click)="resetOffer(id,diag)"></button>
             </span>
             </td>
           </tr>
@@ -265,12 +263,13 @@
 
 </div>
 
-<div id="invoice">
+<div  *ngIf="checked" id="invoice">
 
     <div class="toolbar hidden-print">
         <div class="text-right">
+            <button (click)="addOffre()" id="addOffre" class="btn btn-success"><i class="fa fa-plus"></i> Valider l'Offre </button>
             <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
-            <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+           <!-- <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>-->
         </div>
         <hr>
     </div>
@@ -279,7 +278,6 @@
             <header>
                 <div class="row">
                     <div class="col">
-
                     </div>
                     <div class="col company-details" style="text-align: center">
                         <h2 class="name">
@@ -287,7 +285,7 @@
                             Offre de Prix
                             </a>
                         </h2>
-                        <div>N°32021 du 05/06/2021</div>
+                        <div>N°{{newOffre?.id}} du {{newOffre?.intervention?.dateOffre | date}}</div>
                         <div></div>
                         <div></div>
                     </div>
@@ -302,93 +300,83 @@
                         <div class="email"><a href="mailto:john@example.com">john@example.com</a></div>-->
                     </div>
                     <div class="col invoice-details" style="text-align: center">
-                        <h1 class="invoice-id">Nom du Client</h1>
-                        <div class="date">Adresse</div>
-                        <div class="date">Tel/Fax:</div>
-                        <div class="date">Email:</div>
+                        <h1 class="invoice-id">{{clientOfIntervention?.raisonsocial}}</h1>
+                        <div class="date">Adresse : {{clientOfIntervention?.adresse}}</div>
+                        <div class="date">Tel/Fax: {{clientOfIntervention?.telephone}}</div>
+                        <div class="date">Email: {{clientOfIntervention?.email}}</div>
                     </div>
                 </div>
                 <table border="0" cellspacing="0" cellpadding="0">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th class="text-left">Diagnostic</th>
-                            <th class="text-right">Qte</th>
-                            <th class="text-right">%TVA</th>
-                            <th class="text-right">MNT TVA</th>
-                            <th class="text-right">REMISE</th>
-                            <th class="text-right">PU HT/R</th>
-                            <th class="text-right">PU HT</th>
-                            <th class="text-right">PU TTC</th>
-                            <th class="text-right">PT TTC</th>
+                            <!--<th>#</th>-->
+                            <!--<th class="text-left">Diagnostic</th>-->
+                            <!--<th class="text-right">Qte</th>-->
+                            <!--<th class="text-right">%TVA</th>-->
+                            <!--<th class="text-right">MNT TVA</th>-->
+                            <!--<th class="text-right">REMISE</th>-->
+                            <!--<th class="text-right">PU HT/R</th>-->
+                            <!--<th class="text-right">PU HT</th>-->
+                            <!--<th class="text-right">PU TTC</th>-->
+                            <!--<th class="text-right">PT TTC</th>-->
+                          <th>#</th>
+                          <th class="text-left" >Diagnostic</th>
+                          <th class="text-left" >Piece de Rechange</th>
+                          <th class="text-left" >Qte</th>
+                          <th class="text-left"  *ngIf="clientOfIntervention?.tva">%TVA</th>
+                          <th class="text-left" >PU HT</th>
+                          <th class="text-left"  *ngIf="clientOfIntervention?.remise">REMISE</th>
+                          <th class="text-left"  *ngIf="clientOfIntervention?.remise" >PU HT/R</th>
+                          <th class="text-left"  *ngIf="clientOfIntervention?.tva" >Mnt TVA</th>
+                          <th>PU TTC</th>
+                          <th>PT TTC</th>
                            <!--<th class="text-right">TIMBRE</th>-->
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="no">01</td>
-                            <td class="text-left"><h3>
-                                <a target="_blank" href="https://www.youtube.com/channel/UC_UMEcP_kF0z4E6KbxCpV1w">
-                                Youtube channel
-                                </a>
-                                </h3>
-                               <a target="_blank" href="https://www.youtube.com/channel/UC_UMEcP_kF0z4E6KbxCpV1w">
-                                   Useful videos
-                               </a>
-                               to improve your Javascript skills. Subscribe and stay tuned :)
-                            </td>
-                            <td class="unit">$0.00</td>
-                            <td class="unit">100</td>
-                            <td class="unit">$0.00</td>
-                            <td class="unit">$0.00</td>
-                            <td class="unit">$0.00</td>
-                            <td class="unit">$0.00</td>
-                            <td class="unit">$0.00</td>
-                            <td class="unit">$0.00</td>
-
-                        </tr>
-                        <tr>
-                            <td class="no">02</td>
-                            <td class="text-left"><h3>Website Design</h3>Creating a recognizable design solution based on the company's existing visual identity</td>
-                            <td class="unit">$40.00</td>
-                            <td class="unit">30</td>
-                            <td class="unit">$1,200.00</td>
-                            <td class="unit">$1,200.00</td>
-                            <td class="unit">$1,200.00</td>
-                            <td class="unit">$1,200.00</td>
-                            <td class="unit">$1,200.00</td>
-                            <td class="unit">$1,200.00</td>
+                        <tr *ngFor="let off of newOffre?.diagnostics; let i = index">
+                          <td class="no">{{i+1}}</td>
+                          <td class="text-left">{{off?.diagnostic}}</td>
+                          <td class="text-left"> {{off?.piecederechange}} </td>
+                          <td class="unit"> {{off?.nombredepiece}}</td>
+                            <td class="unit" *ngIf="clientOfIntervention?.tva"> {{off?.tva}} </td>
+                            <td class="unit"> {{off?.puht}} </td>
+                            <td class="unit" *ngIf="clientOfIntervention?.remise" > {{off?.remise}} </td>
+                            <td class="unit" *ngIf="clientOfIntervention?.remise"> {{off?.puhtr}} </td>
+                            <td class="unit" *ngIf="clientOfIntervention?.tva"> {{off?.mnttva}} </td>
+                            <td class="unit"> {{off?.puttc}} </td>
+                            <td class="unit"> {{off?.ptttc}} </td>
                         </tr>
 
 
                     </tbody>
                     <tfoot >
                         <tr >
-                            <td colspan="5"></td>
+                            <td colspan="4"></td>
                             <td colspan="4">TOTAL HTVA</td>
-                            <td>$5,200.00</td>
+                            <td>{{newOffre?.totalHTV}}</td>
                         </tr>
-                        <tr>
-                            <td colspan="5"></td>
+                        <tr  *ngIf="clientOfIntervention?.tva">
+                            <td colspan="4"></td>
                             <td colspan="4">TVA</td>
-                            <td>$1,300.00</td>
+                            <td>{{newOffre?.TVA}}</td>
                         </tr>
-                        <tr>
-                            <td colspan="5"></td>
+                        <tr  *ngIf="clientOfIntervention?.timbre">
+                            <td colspan="4"></td>
                             <td colspan="4">TIMBRE</td>
-                            <td>$1,300.00</td>
+                            <td>{{newOffre?.timbre}}</td>
                         </tr>
                         <tr>
-                            <td colspan="5"></td>
+                            <td colspan="4"></td>
                             <td colspan="4">TOT TTC</td>
-                            <td>$6,500.00</td>
+                            <td>{{newOffre?.totalTTC}}</td>
                         </tr>
                     </tfoot>
                 </table>
 
                 <div class="notices">
-                    <div>ARRETER LA PRESENTE OFFRE DE PRIX A:</div>
-                    <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+                  <div>ARRETER LA PRESENTE OFFRE DE PRIX A: <h2>{{newOffre?.numberToLetter}}</h2></div>
+                    <!--<div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>-->
                 </div>
             </main>
             <footer>
