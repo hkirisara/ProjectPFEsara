@@ -10,7 +10,7 @@
             </div>
         </div>
     </div>
-    <table class="table table-striped table-hover">
+    <table class="table table-striped table-hover" id="tbldiagno">
         <thead>
             <tr>
 
@@ -35,7 +35,7 @@
 
                 <td>
                     <span >
-                        <input type="radio" name="diag" class="ch-rd" [checked]="checked" (change)="onNativeChange($event, interdiagnostic )">
+                        <input type="checkbox" class="radio" value="1" name="diagno"  [checked]="checked" (change)="onNativeChange($event, interdiagnostic )">
                         <label for="muhRadio1"></label>
                     </span>
                 </td>

@@ -47,6 +47,7 @@ export class ClientComponent implements OnInit {
       let client = this.addClientForm.value;
       this.clientService.addClient(client).subscribe((data) => {
           this.getclientFromService();
+           this.addClientForm.reset();
           document.getElementById("close-add-modal").click();
           this.toastr.success('client ajouté avec succés');
           this.addClientForm.reset();

@@ -59,8 +59,9 @@ export class MaterielsComponent implements OnInit {
       let materiel = this.addMaterielsForm.value;
       this.materielsservice.addMateriels(materiel).subscribe((data) => {
           this.getmaterielsFromService();
+          this.addMaterielsForm.reset();
           document.getElementById("close-add-modal").click();
-          this.toastr.success('Materiel ajouté avec succés');
+          this.toastr.success('Materiels ajouté avec succés');
           this.addMaterielsForm.reset();
         }
       )
@@ -90,7 +91,7 @@ export class MaterielsComponent implements OnInit {
     this.materielsservice.updateMateriels(materiel).subscribe((data) => {
           this.getmaterielsFromService();
           document.getElementById("close-add-modal").click();
-          this.toastr.success('client modifé avec succés');
+          this.toastr.success('Materiels modifé avec succés');
           console.log( this.addMaterielsForm.value)
         }
       )
@@ -106,7 +107,7 @@ export class MaterielsComponent implements OnInit {
     this.materielsservice.deleteMateriels(id).subscribe((data) => {
           this.getmaterielsFromService();
           document.getElementById("close-delete-modal").click();
-          this.toastr.success('client supprimé avec succés');
+          this.toastr.success('materiels supprimé avec succés');
         }
       )
   }

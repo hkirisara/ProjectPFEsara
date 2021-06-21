@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   public action: string;
   public prenom: any;
   public nom: any;
-  //public checked: boolean ;
+  public checked: boolean ;
   //public checkedDiac: boolean = false;
   //public checkedMvmt : boolean = false;
   public array: any[] = [];
@@ -121,11 +121,11 @@ export class DashboardComponent implements OnInit {
 
     //console.log(event.target)
 
-    let elems = Array.from(document.getElementsByClassName("ch-rd"))
+   /* let elems = Array.from(document.getElementsByClassName("ch-rd"))
     for(let i=0; i< elems.length; i++){
 
       elems[i].checked = false
-    }
+    }*/
 
     this.interventionService.getInterventionById(data.id).subscribe((res)=>{
       this.mouvement = res

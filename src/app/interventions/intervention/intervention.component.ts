@@ -93,8 +93,10 @@ export class InterventionComponent implements OnInit {
   /* fonction click editclient */
   public editIntervention(){
     let intervention = this.addInterventionsForm.value;
+    console.log(intervention["dateajout"])
     intervention.id = this.idEdit;
     this.interventionService.updateIntervention(intervention).subscribe((data) => {
+      console.log(data)
           this.getinterventionsFromService();
           document.getElementById("close-add-modal").click();
           this.toastr.success('Intervention modifé avec succés');
@@ -135,13 +137,13 @@ export class InterventionComponent implements OnInit {
 
   private initForm(): void {
     this.addInterventionsForm = this.fb.group({
-      client: [null, [Validators.required]],
-      typemateriel: [null, [Validators.required]],
-      marque: [null, [Validators.required]],
-      modele: [null, [Validators.required]],
-      numserie: [null, [Validators.required]],
+      client: [null],
+      typemateriel: [null,],
+      marque: [null],
+      modele: [null],
+      numserie: [null],
       affect: [null],
-      panne: [null, [Validators.required]],
+      panne: [null],
       etat: [null],
       dateajout: [Date.now()]
      

@@ -4,7 +4,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2><b>Gestion Type Materiel</b></h2>
+                        <h2><b>Gestion Des Types Matériels</b></h2>
                     </div>
                     <div class="col-sm-6">
                         <a href="#addTypematerielModal" class="btn btn-info" data-toggle="modal" (click)="openPopup()">
@@ -31,7 +31,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let t of typemateriel; let i=index'>
+                    <tr *ngFor='let t of typemateriel |
+                     paginate: { itemsPerPage: 5, currentPage: page ,totalItems:totalLength}; let i=index'>
 
                         <td>
                            
@@ -49,18 +50,7 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul>
-            </div>
+            <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls>
         </div>
     </div>
 </div>

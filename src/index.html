@@ -197,8 +197,36 @@ $(document).ready(function(){
         });*/
 
 
+        window.onload = function () {
+        var tbldiagno = document.getElementById("tbldiagno");
+        var chks = tbldiagno.getElementsByTagName("INPUT");
+        for (var i = 0; i < chks.length; i++) {
+            chks[i].onclick = function () {
+                for (var i = 0; i < chks.length; i++) {
+                    if (chks[i] != this && this.checked) {
+                        chks[i].checked = false;
+                    }
+                }
+            };
+        }
+    };
 
 
+
+
+  /*  window.onload = function () {
+        var tbloffre = document.getElementById("tbloffre");
+        var chks = tbloffre.getElementsByTagName("INPUT");
+        for (var i = 0; i < chks.length; i++) {
+            chks[i].onclick = function () {
+                for (var i = 0; i < chks.length; i++) {
+                    if (chks[i] != this && this.checked) {
+                        chks[i].checked = false;
+                    }
+                }
+            };
+        }
+    };*/
 
 
   </script>

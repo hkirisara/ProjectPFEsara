@@ -38,7 +38,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let u of utilisateur; let i=index'>
+                    <tr *ngFor='let u of utilisateur |
+                    paginate: { itemsPerPage: 5, currentPage: page ,totalItems:totalLength}; let i=index'>
 
                         <td>
                             
@@ -63,7 +64,7 @@
                     </tr>
                 </tbody>
             </table>
-            
+            <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls>
         </div>
     </div>
 </div>
@@ -97,7 +98,7 @@
                             [ngClass]="{'is-invalid': submitted && addUtilisateurForm.controls.nom.errors, 'is-valid': submitted &&  !addUtilisateurForm.controls.nom.errors}">
                     </div>
                     <div class="form-group">
-                        <label>Telephone <span class="color-error">*</span></label>
+                        <label>Telephone <span class="color-error"></span></label>
                         <input type="text" id="telephone" formControlName="telephone" class="form-control"
                             [ngClass]="{'is-invalid': submitted && addUtilisateurForm.controls.telephone.errors, 'is-valid': submitted &&  !addUtilisateurForm.controls.telephone.errors}">
                         <div *ngIf="isElementNotValid('telephone')" class="invalid-feedback d-block">
@@ -105,7 +106,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Certification <span class="color-error">*</span></label>
+                        <label>Certification <span class="color-error"></span></label>
                         <input type="text" id="certification" formControlName="certification" class="form-control"
                             [ngClass]="{'is-invalid': submitted && addUtilisateurForm.controls.certification.errors, 'is-valid': submitted &&  !addUtilisateurForm.controls.certification.errors}">
                     </div>

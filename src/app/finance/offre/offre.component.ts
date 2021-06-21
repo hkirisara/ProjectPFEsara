@@ -773,7 +773,7 @@ export class OffreComponent implements OnInit {
     this.calculateOffer();
     this.diagnosticService.updateDiagnostic(id).subscribe((data) => {
       console.log(data);
-      this.toastr.success("diagnostique modifier avec succés");
+      this.toastr.success("prix ajouté avec succés");
     });
   }
 

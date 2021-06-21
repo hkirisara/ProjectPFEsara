@@ -102,6 +102,8 @@ export class DiagnosticComponent implements OnInit {
         diagnostic.datediagnostic = new Date(diagnostic.datediagnostic).toLocaleString()
         diagnostic["id"] = data["id"]
         this.diagnostics.push(diagnostic)
+        this.addDiagnosticForm.reset();
+        
       })
     }
   }
@@ -114,10 +116,10 @@ export class DiagnosticComponent implements OnInit {
       this.array = this.array.filter(item => item.id !== data.id);
       
     }
-    /*let elems = Array.from(document.getElementsByClassName("ch-rd"))
-    for(let i=0; i< elems.length; i++){
-      elems[i].checked = false
-    }*/
+    let Element  = Array.from(document.getElementsByClassName("diag"))
+    for(let i=0; i< Element .length; i++){
+      Element [i].checked = false
+    }
     let res = []
     this.diagnostics = null
     let item = null

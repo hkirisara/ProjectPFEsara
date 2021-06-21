@@ -17,12 +17,16 @@ export class UtilisateurComponent implements OnInit {
   public idEdit: any = 0;
   public index: number;
   public utilisateur: any;
+  
 
   //user:any;
   public id: any;
   public prenom: string;
 
   public action: string;
+  totalLength:any;
+  page:number=1;
+  result:any;
 
   constructor(private fb: FormBuilder,
     private toastr: ToastrService,
@@ -44,6 +48,7 @@ export class UtilisateurComponent implements OnInit {
       let utilisateur = this.addUtilisateurForm.value;
       this.utilisateurService.addUtilisateur(utilisateur).subscribe((data) => {
           this.getutilisateurFromService();
+          this.addUtilisateurForm.reset();
           document.getElementById("close-add-modal").click();
           this.toastr.success('Utilisateur ajouté avec succés');
           this.addUtilisateurForm.reset();
@@ -113,9 +118,10 @@ export class UtilisateurComponent implements OnInit {
       cin: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
       prenom: [null, [Validators.required]],
       nom: [null, [Validators.required]],
-      telephone: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
-      certification: [null, [Validators.required]],
-      adresse: [null, [Validators.required]],
+      //telephone: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+      telephone: [null],
+      certification: [null],
+      adresse: [null],
       email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       role: [null, [Validators.required]]
     })

@@ -23,7 +23,9 @@ export class MarqueComponent implements OnInit {
  // public typemateriel: string;
 
   public action: string;
-
+  totalLength:any;
+  page:number=1;
+  result:any;
   constructor(private fb: FormBuilder,
     private toastr: ToastrService,
     private marqueService: MarqueService) { }
@@ -44,6 +46,7 @@ export class MarqueComponent implements OnInit {
       let marque = this.addMarqueForm.value;
       this.marqueService.addMarque(marque).subscribe((data) => {
           this.getmarqueFromService();
+          this.addMarqueForm.reset();
           document.getElementById("close-add-modal").click();
           this.toastr.success('Marque ajouté avec succés');
           this.addMarqueForm.reset();

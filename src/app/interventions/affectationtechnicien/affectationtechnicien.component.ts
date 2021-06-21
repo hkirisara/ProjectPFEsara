@@ -50,9 +50,9 @@ export class AffectationtechnicienComponent implements OnInit {
 
       this.interventionService.getAllIntervention().subscribe((data) => {
         this.intervention = this.intiTable(data).filter(item => item.etat === "ajouté");
-        for (let interventionKey in this.intervention) {
+      /*  for (let interventionKey in this.intervention) {
           console.log(interventionKey["affect"])
-        }
+        }*/
       });
     })
 
@@ -97,6 +97,8 @@ export class AffectationtechnicienComponent implements OnInit {
         //this.getaffectationFromService();
         // 
         console.log(data)
+        this.getaffectationFromService();
+        this.addAffectationsForm.reset();
         document.getElementById("close-add-modal").click();
         this.toastr.success('affectation ajouté avec succés');
         /*let list = Array.from(document.getElementsByClassName("ch-inter"))
@@ -115,6 +117,7 @@ export class AffectationtechnicienComponent implements OnInit {
           }
         }*/
         this.addAffectationsForm.reset();
+       
       }
       )
     }
@@ -145,10 +148,11 @@ export class AffectationtechnicienComponent implements OnInit {
   }
   // copy des données à modifer dans le form du modification
   public moveDataToModifForm(index: any) {
+    console.log(index)
     this.action = "edit";
     //moveDataToModifForm
-    let currentaffectation = this.affectation[index];
-    this.idEdit = this.affectation[index].id;
+    let currentaffectation = this.intervention[index];
+    this.idEdit = this.intervention[index].id;
     //  mettre les valeurs de l'objet < currentclient > dans les champs du formulaire edit 
     this.addAffectationsForm.patchValue(currentaffectation);
   }
@@ -160,7 +164,7 @@ export class AffectationtechnicienComponent implements OnInit {
     this.affectationservice.updateAffectation(affectation).subscribe((data) => {
       this.getaffectationFromService();
       document.getElementById("close-add-modal").click();
-      this.toastr.success('client modifé avec succés');
+      this.toastr.success('Affectation modifé avec succés');
     }
     )
   }

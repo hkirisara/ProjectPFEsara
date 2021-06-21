@@ -24,6 +24,9 @@ export class TypematerielComponent implements OnInit {
  // public typemateriel: string;
 
   public action: string;
+  totalLength:any;
+  page:number=1;
+  result:any;
 
   constructor(private fb: FormBuilder,
     private toastr: ToastrService,
@@ -45,6 +48,7 @@ export class TypematerielComponent implements OnInit {
       let typemateriel = this.addTypematerielForm.value;
       this.typematerielService.addTypemateriel(typemateriel).subscribe((data) => {
           this.gettypematerielFromService();
+          this.addTypematerielForm.reset();
           document.getElementById("close-add-modal").click();
           this.toastr.success('Type materiel ajouté avec succés');
           this.addTypematerielForm.reset();
