@@ -26,6 +26,10 @@ import { DatePipe } from '@angular/common';
 import { OffreComponent } from './finance/offre/offre.component';
 import { TestComponent } from './test/test.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {HttpIntercepterJwtAuthServiceService} from './service/http-intercepter-jwt-auth-service.service';
+import { LoginComponent } from './components/login/login.component';
+import { BoncommandeComponent } from './finance/boncommande/boncommande.component';
+import { StatisqueComponent } from './statisque/statisque.component';
 
 
 
@@ -55,6 +59,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     OffreComponent,
     TestComponent,
     DashboardComponent,
+    LoginComponent,
+    BoncommandeComponent,
+    StatisqueComponent
     
    
     
@@ -77,10 +84,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ToastrModule.forRoot(),
     HttpClientModule,
     NgxPaginationModule,
-   
+    
    
   ],
-  providers: [],
+  providers: [ {provide:HTTP_INTERCEPTORS,useClass:HttpIntercepterJwtAuthServiceService,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

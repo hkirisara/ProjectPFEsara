@@ -25,7 +25,7 @@
                 <th>Marque</th>
                 <th>Modele</th>
                 <th>N/S</th>
-                <th>Affectation</th>
+                <!--<th>Affectation</th>-->
                 <th>Panne</th>
                 <th>Etat</th>
                 <th>Action</th>
@@ -46,7 +46,7 @@
                 <td>{{intervention.marque?.marque }}</td>
                 <td>{{intervention.modele }}</td>
                 <td>{{intervention.numserie }}</td>
-                <td>{{intervention.affect }}</td>
+               <!-- <td>{{intervention.affect }}</td>-->
                 <td>{{intervention.panne }}</td>
                 <td>{{intervention.etat }}</td>
 
@@ -117,11 +117,11 @@
                         <input type="text" id="numserie" formControlName="numserie" class="form-control" 
                             [ngClass]="{'is-invalid': submitted && addInterventionsForm.controls.numserie.errors, 'is-valid': submitted &&  !addInterventionsForm.controls.numserie.errors}">
                     </div>
-                    <div class="form-group">
+                   <!-- <div class="form-group">
                         <label>Affectation <span class="color-error">*</span></label>
                         <input type="text" id="affect" formControlName="affect" class="form-control" 
                             [ngClass]="{'is-invalid': submitted && addInterventionsForm.controls.affect.errors, 'is-valid': submitted &&  !addInterventionsForm.controls.affect.errors}">
-                    </div>
+                    </div>-->
                     <div class="form-group">
                         <label>Panne <span class="color-error">*</span></label>
                         <textarea type="text" id="panne" formControlName="panne" class="form-control"

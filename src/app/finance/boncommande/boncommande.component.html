@@ -1,0 +1,142 @@
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2><b>Validation de l'Offre Financiére</b></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+    <div class="form">
+    <form class="form-validate form-horizontal " [formGroup]="addOffreForm">
+    <div class="form-group">
+       <!-- <label class="control-label col-lg-1">Client <span class="color-error">*</span></label>
+        <div class="col-lg-3">
+          <select id="client" formControlName="client" class="form-control" (ngModelChange)="onChange($event)">
+            <option [ngValue]="'tous'">Afficher Tous Client</option>
+            <option *ngFor="let option of client" [ngValue]="option.id">{{option?.raisonsocial}}</option>
+          </select>
+        </div>-->
+      </div>
+      </form>
+    </div>
+</div>
+    <table class="table table-striped table-hover" id="tblFruits">
+        <thead>
+            <tr>
+
+                <th>
+
+
+                </th>
+                <th>Client</th>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Marque</th>
+                <th>Modele</th>
+                <th>N/S</th>
+                <th>Panne</th>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let interoffre of intervention| paginate: { itemsPerPage: 3, currentPage: page ,totalItems:totalLength}; let i=index'>
+
+                <td>
+                    <span >
+                        <input type="radio" id="muhRadio1" class="ch-rd"  name="radiogroup" (change)="onNativeChange($event, interoffre )">
+                        <label for="muhRadio1"></label>
+                    </span>
+                </td>
+                <td>{{interoffre?.raisonsocial }}</td>
+                <td>{{interoffre?.dateajout }}</td>
+                <td>{{interoffre?.typemateriel}}</td>
+                <td>{{interoffre?.marque }}</td>
+                <td>{{interoffre?.modele}}</td>
+                <td>{{interoffre?.numserie}}</td>
+                <td>{{interoffre?.panne }}</td>
+
+
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls></div>
+
+</div>
+<div *ngIf="checked " class="container-xl">
+<section class="panel" >
+    <div class="panel-body">
+      <form class="form-horizontal " [formGroup]="addCommandeForm">
+        <div class="form-group">
+          <label class="control-label col-lg-2" for="inputSuccess">Validation</label>
+          <div class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-4">
+           <!-- <label class="radio-inline">
+                                 Oui   <input type="radio" id="validcommande" formControlName="validcommande" value="option1"> 
+                                </label>
+           
+            <label class="radio-inline">
+                                 Non   <input type="radio" id="refuscommande" formControlName="refuscommande"  value="option3"> 
+                                </label>-->
+             <select id="validcommande" formControlName="validcommande" class="form-control">
+                <option >Oui</option>
+                <option >Non</option>
+                </select>                
+
+          </div>
+        </div>
+    </div>
+</div>
+       
+
+        <div class="form-group">
+          <label class="control-label col-lg-2" for="inputSuccess">N°Bon De Commande</label>
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-4">
+                <input type="text" class="form-control" id="numerocommande" formControlName="numerocommande"  >
+              </div>
+            </div>
+        </div> 
+        </div>
+        <div class="form-group">
+            <label class="control-label col-lg-2" for="inputSuccess">Date de Bon De Commande</label>
+            <div class="col-lg-8">
+              <div class="row">
+                <div class="col-lg-4">
+                  <input type="datetime-local" id="datecommande" formControlName="datecommande" 
+                  name="datecommande" 
+                  min="2018-06-07T00:00" max="2025-12-31T00:00" class="form-control" >
+                </div>
+              </div>
+          </div> 
+          </div>
+          <div class="form-group">
+            <label class="control-label col-lg-2" for="inputSuccess"></label>
+            <div class="col-lg-8">
+              <div class="row">
+                <div class="col-lg-4">
+                    <button type="button"  class="btn btn-danger" style="margin:5px;">
+                         Annuler  </button>
+                    <button (click)="addCommande()" type="submit" class="btn btn-info">
+                        <i class="fa fa-plus"></i> Valider  </button>
+                </div>
+              </div>
+          </div> 
+          </div>
+
+      </form>
+    </div>
+  </section>
+</div>

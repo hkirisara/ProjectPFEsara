@@ -1,10 +1,30 @@
-<section id="container" class="">
-
+<section id="container" *ngIf="isLogedIn === '1'">
   <app-navbar></app-navbar>
 
   <app-sidebar></app-sidebar>
 
   <app-footer></app-footer>
 </section>
+<section *ngIf="isLogedIn === '0'">
+  <!--<button (click)="onLogin()">login</button>-->
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="active"> Sign In </h2>
 
+      <!-- Login Form -->
+      <form>
+        <input type="text" id="login" class="fadeIn second" name="login" [(ngModel)]="login" placeholder="login">
+        <input type="password" id="password" class="fadeIn third" name="login" [(ngModel)]="password" placeholder="password">
+        <input type="submit" class="fadeIn fourth" (click)="onLogin()" value="Log In">
+      </form>
 
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="#">Forgot Password?</a>
+      </div>
+
+    </div>
+  </div>
+
+</section>

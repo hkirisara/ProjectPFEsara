@@ -51,6 +51,7 @@
                         <td>{{u.certification }}</td>
                         <td>{{u.adresse }}</td>
                         <td>{{u.email }}</td>
+                        <!--<td>{{u.password }}</td>-->
                         <td>{{u.role }}</td>
                         <td>
                             <a href="#addUtilisateurModal" class="edit" data-toggle="modal" role="button"
@@ -121,6 +122,14 @@
                             [ngClass]="{'is-invalid': submitted && addUtilisateurForm.controls.email.errors, 'is-valid': submitted &&  !addUtilisateurForm.controls.email.errors}">
                         <div *ngIf="isElementNotValid('email')" class="invalid-feedback d-block">
                             <small class="color-error">L'email est invalide</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Password <span class="color-error">*</span></label>
+                        <input type="text" id="password" formControlName="password" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && addUtilisateurForm.controls.password.errors, 'is-valid': submitted &&  !addUtilisateurForm.controls.password.errors}">
+                        <div *ngIf="isElementNotValid('password')" class="invalid-feedback d-block">
+                            <small class="color-error">Le mot de passe est invalide</small>
                         </div>
                     </div>
                     <div class="form-group">

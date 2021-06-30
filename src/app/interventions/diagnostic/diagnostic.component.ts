@@ -116,10 +116,10 @@ export class DiagnosticComponent implements OnInit {
       this.array = this.array.filter(item => item.id !== data.id);
       
     }
-    let Element  = Array.from(document.getElementsByClassName("diag"))
+     /*let Element  = Array.from(document.getElementsByClassName("diag"))
     for(let i=0; i< Element .length; i++){
-      Element [i].checked = false
-    }
+       Element [i].checked = false
+     }*/
     let res = []
     this.diagnostics = null
     let item = null

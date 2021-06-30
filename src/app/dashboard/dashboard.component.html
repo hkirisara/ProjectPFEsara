@@ -88,9 +88,9 @@
                 <th>Diagnostiqué</th>
                 <th>Soumission d'offre</th>
                 <th>Refus</th>
-                <th>Réparé</th>
                 <th>En attente de Livraison</th>
                 <th>Livrée</th>
+                <th>Facturé</th>
 
             </tr>
         </thead>
@@ -109,9 +109,9 @@
                 <td>{{mouvement?.dateOffre }}</td>
                 <td>{{mouvement?.refus}}</td>
                 <td>{{mouvement?.attpiece}}</td>
-                <td>{{mouvement?.repare }}</td>
                 <td>{{mouvement?.attlivraison}}</td>
-                <td>{{mouvement?.livree}}</td>  
+                <td>{{mouvement?.livree}}</td> 
+                <td>{{mouvement?.facture }}</td> 
               
 
 
@@ -124,4 +124,65 @@
    
     <div >
        <!-- <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls></div>-->
+</div>
+
+<div height="150"></div>
+<br>
+<br>
+<br><br><br>
+<div >
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+      
+        <div class="page-wrapper">
+            
+            <div class="page-breadcrumb">
+                
+            </div>
+  
+            <div class="container-fluid">
+               
+                <div class="row">
+                    <!-- column -->
+                   
+                    <!-- column -->
+                    <!-- column -->
+                    <div style="text-align:center ; margin-left: 20px;">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title"><b>Catégorie Matériel</b></h4>
+                                <div>
+                                    <canvas id="bar-chart" height="150"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title"><b>Etat d'Intervention</b></h4>
+                                <div>
+                                    <canvas id="pie-chart" height="150"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                </div>
+            </div>
+     
+        </div>
+
+    </div>
+    
+    
 </div>

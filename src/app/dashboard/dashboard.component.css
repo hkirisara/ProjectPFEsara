@@ -399,5 +399,13 @@ table.table .avatar {
     .invoice>div:last-child {
         page-break-before: always
     }
-
+	.card {
+  
+		margin-bottom: 10px; /* Added */
+		margin-left: 30%;      
+		margin-right: 30%;
+		width: auto;
+		
+	}
 }
+

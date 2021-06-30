@@ -142,7 +142,7 @@ export class InterventionComponent implements OnInit {
       marque: [null],
       modele: [null],
       numserie: [null],
-      affect: [null],
+     // affect: [null],
       panne: [null],
       etat: [null],
       dateajout: [Date.now()]

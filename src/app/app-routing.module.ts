@@ -12,6 +12,8 @@ import { MarqueComponent } from './configuration/marque/marque.component';
 import { MouvementComponent } from './interventions/mouvement/mouvement.component';
 import { TypematerielComponent } from './configuration/typemateriel/typemateriel.component';
 import { UtilisateurComponent } from './configuration/utilisateur/utilisateur.component';
+import { BoncommandeComponent } from './finance/boncommande/boncommande.component';
+import { StatisqueComponent } from './statisque/statisque.component';
 
 
 
@@ -28,6 +30,9 @@ const routes: Routes = [
   {path:'mouvement',component: MouvementComponent},
   {path:'offre',component: OffreComponent},
   {path:'dashboard',component: DashboardComponent},
+  {path:'bondecommande',component: BoncommandeComponent},
+  {path:'statistique',component: StatisqueComponent},
+
 
   
   
