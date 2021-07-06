@@ -2,12 +2,18 @@
     <div id="sidebar" class="nav-collapse ">
       <!-- sidebar menu start-->
       <ul class="sidebar-menu">
-        <li class="active">
+        <li class="sub-menu">
           <a class="" routerLink="/dashboard">
                         <i class="icon_house_alt"></i>
                         <span>Dashboard</span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
+           <ul class="sub"> 
+           <li><a class="" routerLink="/suivi">Suivi Matériel</a></li> 
+          </ul>      
         </li>
+
+
         <li class="sub-menu">
           <a href="javascript:;" class="">
                         <i class="fa fa-cogs"></i>
@@ -24,6 +30,8 @@
 
           </ul>
         </li>
+
+
         <li class="sub-menu">
           <a href="javascript:;" class="">
                         <i class="fa fa-file-text"></i>
@@ -51,8 +59,9 @@
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
           <ul class="sub">
-            <li><a class="" routerLink="/offre">Offre</a></li>
-            <li><a class="" routerLink="/bondecommande">Bon de Commande</a></li>
+            <li><a class="" routerLink="/offre">Offre De Prix</a></li>
+            <li><a class="" routerLink="/bondecommande">Bon De Commande</a></li>
+            <li><a class="" routerLink="/bondelivraison">Bon De Livraison</a></li>
           </ul>
         </li>
          <!--<li class="sub-menu">

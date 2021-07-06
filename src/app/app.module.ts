@@ -29,7 +29,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {HttpIntercepterJwtAuthServiceService} from './service/http-intercepter-jwt-auth-service.service';
 import { LoginComponent } from './components/login/login.component';
 import { BoncommandeComponent } from './finance/boncommande/boncommande.component';
-import { StatisqueComponent } from './statisque/statisque.component';
+import { BonlivraisonComponent } from './finance/bonlivraison/bonlivraison.component';
+
+import { SuivimaterielComponent } from './dash/suivimateriel/suivimateriel.component';
+
 
 
 
@@ -61,7 +64,11 @@ import { StatisqueComponent } from './statisque/statisque.component';
     DashboardComponent,
     LoginComponent,
     BoncommandeComponent,
-    StatisqueComponent
+    BonlivraisonComponent,
+   
+    SuivimaterielComponent,
+   
+  
     
    
     

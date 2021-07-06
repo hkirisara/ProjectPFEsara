@@ -2,19 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ClientService } from 'src/app/service/client.service';
-import { CommandeService } from 'src/app/service/commande.service';
 import { DiagnosticService } from 'src/app/service/diagnostic.service';
 import { InterventionService } from 'src/app/service/intervention.service';
 import { OffreService } from 'src/app/service/offre.service';
 
 @Component({
-  selector: 'app-boncommande',
-  templateUrl: './boncommande.component.html',
-  styleUrls: ['./boncommande.component.css']
+  selector: 'app-facture',
+  templateUrl: './facture.component.html',
+  styleUrls: ['./facture.component.css']
 })
-export class BoncommandeComponent implements OnInit {
+export class FactureComponent implements OnInit {
 
-  public addCommandeForm: FormGroup;
+  public addOffreForm: FormGroup;
   public submitted = false;
   public idDelete: any = 0;
   public idEdit: any = 0;
@@ -41,8 +40,6 @@ export class BoncommandeComponent implements OnInit {
   public interventionId: any;
   public InterventionId: string;
   public client: any;
-  public commande :any;
-  
   totalLength: any;
   page: number = 1;
   result: any;
@@ -57,8 +54,7 @@ export class BoncommandeComponent implements OnInit {
     private diagnosticService: DiagnosticService,
     private interventionService: InterventionService,
     private offreService: OffreService,
-    private clientService: ClientService,
-    private commandeService:CommandeService
+    private clientService: ClientService
   ) {}
 
   ngOnInit() {
@@ -82,14 +78,13 @@ export class BoncommandeComponent implements OnInit {
         ).toLocaleString();
       }
     });
-    this.commandeService.getAllCommande().subscribe((data) => {
-      this.commande = this.intiTable(data);
-      for (let i = 0; i < this.commande.length; i++) {
-        this.commande[i].datecommande = new Date(
-          this.commande[i].datecommande
-        ).toLocaleString();
+    /*this.offreService.getoffreByInterventionId(this.interventionId)*/
+    /* this.diagnosticService.getDiagnosticByInterventionId(this.InterventionId).subscribe((data) => {
+      this.interdiagnostic = this.intiTable(data)
+      for (let i=0; i<this.interdiagnostic.length; i++) {
+        this.interdiagnostic[i].date = new Date(this.interdiagnostic[i].date).toLocaleString()
       }
-    });
+    });*/
 
     this.interventionService.getAllInterventionprocessed().subscribe((data) => {
       this.intervention = this.intiTable(data);
@@ -119,24 +114,23 @@ export class BoncommandeComponent implements OnInit {
     }
     return result;
   }
-  public addCommande() {
-    this.submitted = true;
-    if (this.addCommandeForm.valid) {
-      let commande = this.addCommandeForm.value;
-      console.log(commande);
-      this.commandeService.addCommande(this.interventionId,commande).subscribe((data) => {
-          console.log(data);
-          this.getoffreFromService();
-          this.toastr.success("Bon de Commande ajouté avec succés");
-          this.addCommandeForm.reset();
-          commande.datecommande = new Date(commande.datecommande).toLocaleString()
-          commande["id"] = data["id"]
-          
-          this.addCommandeForm.reset();
-        });
-    }
+  public addOffre() {
+    // this.submitted = true;
+    // if (this.addOffreForm.valid) {
+    //   let offre = this.addOffreForm.value;
+    //   this.offreService.addOffre(offre).subscribe((data) => {
+    //     this.getoffreFromService();
+    //     document.getElementById("close-add-modal").click();
+    //     this.toastr.success("offre ajouté avec succés");
+    //     this.addOffreForm.reset();
+    //   });
+    // }
 
-   
+    this.offreService.addOffre(this.newOffre).subscribe((data) => {
+      console.log(data);
+      this.toastr.success("offre modifé avec succés");
+      // this.newOffre=data;
+    });
   }
 
   public onNativeChange(event, data) {
@@ -266,12 +260,12 @@ export class BoncommandeComponent implements OnInit {
     // let currentoffre = this.offre[index];
     // this.idEdit = this.offre[index].id;
     // //  mettre les valeurs de l'objet < currentclient > dans les champs du formulaire edit
-    // this.addCommandeForm.patchValue(currentoffre);
+    // this.addOffreForm.patchValue(currentoffre);
   }
 
   /* fonction click editclient */
   public editOffre() {
-    let offre = this.addCommandeForm.value;
+    let offre = this.addOffreForm.value;
     offre.id = this.idEdit;
     this.offreService.updateOffre(offre).subscribe((data) => {
       this.getoffreFromService();
@@ -307,21 +301,28 @@ export class BoncommandeComponent implements OnInit {
 
   public isElementNotValid(field: string): boolean {
     return (
-      this.addCommandeForm.get(field) &&
-      !this.addCommandeForm.get(field).hasError("required") &&
-      this.addCommandeForm.get(field).invalid
+      this.addOffreForm.get(field) &&
+      !this.addOffreForm.get(field).hasError("required") &&
+      this.addOffreForm.get(field).invalid
     );
   }
 
   private initForm(): void {
-    this.addCommandeForm = this.fb.group({
-      datecommande: [Date.now()],
-      numerocommande: [null],
-      validcommande: [null],
+    this.addOffreForm = this.fb.group({
+      dateoffre: [Date.now()],
+      diagnostic: [null],
+      piecederechange: [null],
       //client: [null],
-      refuscommande: [null],
-      
-      
+      qte: [null],
+      tva: [null],
+      puht: [null],
+      remise: [null],
+      puhtr: [null],
+      mnttva: [null],
+      puttc: [null],
+      ptttc: [null],
+      timbre: [null],
+      client: [null],
     });
   }
 
@@ -395,10 +396,5 @@ export class BoncommandeComponent implements OnInit {
     this.interdiagnostic[id][name] = editField;
   }
 
-  
-  
 
-  
-
-
-}
+  }

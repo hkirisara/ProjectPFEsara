@@ -13,7 +13,8 @@ import { MouvementComponent } from './interventions/mouvement/mouvement.componen
 import { TypematerielComponent } from './configuration/typemateriel/typemateriel.component';
 import { UtilisateurComponent } from './configuration/utilisateur/utilisateur.component';
 import { BoncommandeComponent } from './finance/boncommande/boncommande.component';
-import { StatisqueComponent } from './statisque/statisque.component';
+import { BonlivraisonComponent } from './finance/bonlivraison/bonlivraison.component';
+import { SuivimaterielComponent } from './dash/suivimateriel/suivimateriel.component';
 
 
 
@@ -31,7 +32,9 @@ const routes: Routes = [
   {path:'offre',component: OffreComponent},
   {path:'dashboard',component: DashboardComponent},
   {path:'bondecommande',component: BoncommandeComponent},
-  {path:'statistique',component: StatisqueComponent},
+  {path:'bondelivraison',component: BonlivraisonComponent},
+  {path:'suivi',component: SuivimaterielComponent},
+  
 
 
   

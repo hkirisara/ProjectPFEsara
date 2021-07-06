@@ -19,8 +19,8 @@ export class CommandeService {
     return this.httpClient.get(`${this.commandeUrl}/${id}`);
 
   }
-  addCommande(commande: any) {
-    return this.httpClient.post(this.commandeUrl, commande);
+  addCommande(interventionId: string, commande: any) {
+    return this.httpClient.post(`${this.commandeUrl}/${interventionId}`, commande);
 
   }
   updateCommande(commande: any ) { 

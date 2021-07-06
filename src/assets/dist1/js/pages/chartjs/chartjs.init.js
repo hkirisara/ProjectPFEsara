@@ -8,7 +8,7 @@ $(function () {
 		  datasets: [
 			{
 			  label: "Nombre:",
-			  backgroundColor: ["#6174d5", "#5f76e8", "#768bf4", "#7385df", "#b1bdfa"],
+			  backgroundColor: ["#69D2E7", "#5f76e8", "#768bf4", "#7385df", "#b1bdfa"],
 			  data: [500,400,450,280,250,200]
 			}
 		  ]
@@ -29,7 +29,7 @@ $(function () {
 		  labels: ["Réceptionné", "Soumission d'offre", "Livrée", "Facturé"],
 		  datasets: [{
 			label: "Etat:",
-			backgroundColor: ["Blue", "#b1bdfa","#5f76e8","Orange"],
+			backgroundColor: ["#69D2E7", "#b1bdfa","#5f76e8","#E0E4CC"],
 			data: [1100,700,400,1000]
 		  }]
 		},

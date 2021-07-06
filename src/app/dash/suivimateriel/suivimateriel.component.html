@@ -1,0 +1,126 @@
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2><b>Affichage des Interventions</b></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+
+                <th>
+
+                    
+                </th>
+                <th>Client</th>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Marque</th>
+                <th>Modele</th>
+                <th>N/S</th>
+                <th>Panne</th>
+                <th>Etat</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let interdiagnostic of intervention| paginate: { itemsPerPage: 5, currentPage: page ,totalItems:totalLength}; let i=index'>
+
+                <td>
+                    <span >
+                        <input type="radio" name="inter" class="ch-rd" [checked]="checked" (change)="onNativeChange($event, interdiagnostic, this)">
+                        <label for="muhRadio1"></label>
+                    </span>
+                </td>
+                <td>{{interdiagnostic?.raisonsocial }}</td>
+                <td>{{interdiagnostic?.dateajout }}</td>
+                <td>{{interdiagnostic?.typemateriel}}</td>
+                <td>{{interdiagnostic?.marque }}</td>
+                <td>{{interdiagnostic?.modele}}</td>
+                <td>{{interdiagnostic?.numserie}}</td>
+                <td>{{interdiagnostic?.panne }}</td>
+                <td>{{interdiagnostic?.etat}}</td>
+
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls></div>
+    
+</div>
+
+
+<div class="container-xl" >  <!--*ngIf="array && array.length > 0"-->
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2><b>Suivi Etats / Workflow Maintenance</b></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+
+                <th>
+                  
+                   <!-- <span class="custom-checkbox">
+                        <input type="checkbox" id="selectAll" (change)="checkAllMvmt($event)">
+                        <label for="selectAll"></label>
+                    </span> -->
+                </th>
+                <th>Réceptionné</th>
+                <th>Diagnostiqué</th>
+                <th>Soumission d'offre</th>
+                <th>Refus</th>
+                <th>En attente de Livraison</th>
+                <th>Livrée</th>
+                <th>Facturé</th>
+
+            </tr>
+        </thead>
+        <tbody *ngIf="mouvement != null">
+            <!--<tr *ngFor='let mouvement of intervention| paginate: { itemsPerPage: 6, currentPage: page ,totalItems:totalLength}; let i=index'>
+            --><tr>
+                <td>
+                   <!--  <span class="custom-checkbox">
+                        <input type="checkbox" [checked]="checkedMvmt"
+                            (change)="onNativeChangeMvmt($event, mouvement)">
+                        <label for="checkbox"></label>
+                    </span>-->
+                </td>
+                <td>{{mouvement?.dateajout }}</td>
+                <td>{{mouvement?.datediagnostic}}</td> 
+                <td>{{mouvement?.dateOffre }}</td>
+                <td>{{mouvement?.refus}}</td>
+                <td>{{mouvement?.attpiece}}</td>
+                <td>{{mouvement?.attlivraison}}</td>
+                <td>{{mouvement?.livree}}</td> 
+                <td>{{mouvement?.facture }}</td> 
+              
+
+
+
+
+               
+            </tr>
+        </tbody>
+    </table>
+   
+    <div >
+       <!-- <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls></div>-->
+</div>

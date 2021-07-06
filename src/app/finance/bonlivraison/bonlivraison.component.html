@@ -4,7 +4,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2><b>Interventions "En Cours de Diagnostic"</b></h2>
+                        <h2><b>Interventions "En Soumission d'Offre"</b></h2>
                     </div>
                 </div>
             </div>
@@ -12,16 +12,7 @@
     </div>
     <div class="panel-body">
     <div class="form">
-    <form class="form-validate form-horizontal " [formGroup]="addOffreForm">
-    <div class="form-group">
-        <label class="control-label col-lg-1">Client <span class="color-error">*</span></label>
-        <div class="col-lg-3">
-          <select id="client" formControlName="client" class="form-control" (ngModelChange)="onChange($event)">
-            <option [ngValue]="'tous'">Afficher Tous Client</option>
-            <option *ngFor="let option of client" [ngValue]="option.id">{{option?.raisonsocial}}</option>
-          </select>
-        </div>
-      </div>
+    <form >
       </form>
     </div>
 </div>
@@ -81,11 +72,8 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2><b>Prix</b></h2>
+                        <h2><b>Validation de Bon de Livraison</b></h2>
                     </div>
-
-
-
                 </div>
             </div>
         </div>
@@ -97,15 +85,7 @@
         <table class="table table-bordered table-responsive-md table-striped text-center">
           <tr>
             <th>Diagnostic</th>
-            <th>Piece de Rechange</th>
-            <th>Qte</th>
-            <th *ngIf="clientOfIntervention?.tva">%TVA</th>
-            <th>PU HT</th>
-            <th *ngIf="clientOfIntervention?.remise">REMISE</th>
-            <th *ngIf="clientOfIntervention?.remise" >PU HT/R</th>
-            <th *ngIf="clientOfIntervention?.tva" >Mnt TVA</th>
-            <th>PU TTC</th>
-            <th>PT TTC</th>
+            <th>Numéro de serie</th>
             <th></th>
           </tr>
           <tr *ngFor="let diag of interdiagnostic; let id = index">
@@ -113,32 +93,9 @@
               <span (keyup)="changeValue(id, 'diagnostic', $event)" (blur)="updateList(id, 'diagnostic', $event)" >{{diag.diagnostic}}</span>
             </td>
             <td>
-              <span  (keyup)="changeValue(id, 'piecederechange', $event)" (blur)="updateList(id, 'piecederechange', $event)">{{diag.piecederechange}}</span>
+              <span  (keyup)="changeValue(id, 'numserie', $event)" (blur)="updateList(id, 'numserie', $event)">{{diag.numserie}}</span>
             </td>
-            <td>
-              <span  (keyup)="changeValue(id, 'nombredepiece', $event)" (blur)="updateList(id, 'nombredepiece', $event)">{{diag.nombredepiece}}</span>
-            </td>
-            <td *ngIf="clientOfIntervention?.tva">
-              <span contenteditable="true" (keyup)="changeValue(id, 'tva', $event)" (blur)="updateList(id, 'tva', $event)">{{diag.tva}}</span>
-            </td>
-            <td>
-              <span contenteditable="true" (keyup)="changeValue(id, 'puht', $event)" (blur)="updateList(id, 'puht', $event)">{{diag.puht}}</span>
-            </td>
-            <td *ngIf="clientOfIntervention?.remise" >
-              <span contenteditable="true" (keyup)="changeValue(id, 'remise', $event)" (blur)="updateList(id, 'remise', $event)">{{diag.remise}}</span>
-            </td>
-            <td *ngIf="clientOfIntervention?.remise">
-              <span  (keyup)="changeValue(id, 'puhtr', $event)" (blur)="updateList(id, 'puhtr', $event)">{{diag.puhtr}}</span>
-            </td>
-            <td *ngIf="clientOfIntervention?.tva">
-              <span  (keyup)="changeValue(id, 'mnttva', $event)" (blur)="updateList(id, 'mnttva', $event)">{{diag.mnttva}}</span>
-            </td>
-            <td>
-              <span (keyup)="changeValue(id, 'puttc', $event)" (blur)="updateList(id, 'puttc', $event)">{{diag.puttc}}</span>
-            </td>
-            <td>
-              <span (keyup)="changeValue(id, 'ptttc', $event)" (blur)="updateList(id, 'ptttc', $event)">{{diag.ptttc}}</span>
-            </td>
+            
             <td>
             <span class="table-up">
               <a class="indigo-text">
@@ -186,41 +143,11 @@
 
                     </div>
                     <div class="form-group">
-                        <label>Piéce de rechange <span class="color-error">*</span></label>
-                        <input type="text" id="piecederechange" formControlName="piecederechange" class="form-control">
+                        <label>Numero de serie <span class="color-error">*</span></label>
+                        <input type="text" id="numserie" formControlName="numserie" class="form-control">
 
                     </div>
-                    <div class="form-group">
-                        <label>Qte<span class="color-error">*</span></label>
-                        <input type="text" id="qte" formControlName="qte" class="form-control">
-
-                    </div>
-                    <div class="form-group">
-                        <label>%TVA<span class="color-error">*</span></label>
-                        <input type="text" id="tva" formControlName="tva" class="form-control">
-
-                    </div>
-                    <div class="form-group">
-                        <label>PU HT<span class="color-error">*</span></label>
-                        <input type="text" id="puht" formControlName="puht" class="form-control">
-
-                    </div>
-                    <div class="form-group">
-                        <label>Mnt TVA<span class="color-error">*</span></label>
-                        <input type="text" id="mnttva" formControlName="mnttva" class="form-control">
-
-                    </div>
-                    <div class="form-group">
-                        <label>PU TTC<span class="color-error">*</span></label>
-                        <input type="text" id="puttc" formControlName="puttc" class="form-control">
-
-                    </div>
-                    <div class="form-group">
-                        <label>PT TTC<span class="color-error">*</span></label>
-                        <input type="text" id="ptttc" formControlName="ptttc" class="form-control">
-
-                    </div>
-
+                  
 
 
 
@@ -267,7 +194,7 @@
 
     <div class="toolbar hidden-print">
         <div class="text-right">
-            <button (click)="addOffre()" id="addOffre" class="btn btn-success"><i class="fa fa-plus" style="margin:5px;"></i> Valider l'Offre </button>
+            <button (click)="addOffre()" id="addOffre" class="btn btn-success"><i class="fa fa-plus" style="margin:5px;"></i> Valider Le Bon de Commande </button>
             <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
            <!-- <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>-->
         </div>
@@ -282,7 +209,7 @@
                     <div class="col company-details" style="text-align: center">
                         <h2 class="name">
                             <a target="_blank" href="https://lobianijs.com">
-                            Offre de Prix
+                            Bon de Livraison
                             </a>
                         </h2>
                         <div>N°{{newOffre?.id}} du {{newOffre?.intervention?.dateOffre | date}}</div>
@@ -321,15 +248,8 @@
                             <!--<th class="text-right">PT TTC</th>-->
                           <th>#</th>
                           <th class="text-left" >Diagnostic</th>
-                          <th class="text-left" >Piece de Rechange</th>
-                          <th class="text-left" >Qte</th>
-                          <th class="text-left"  *ngIf="clientOfIntervention?.tva">%TVA</th>
-                          <th class="text-left" >PU HT</th>
-                          <th class="text-left"  *ngIf="clientOfIntervention?.remise">REMISE</th>
-                          <th class="text-left"  *ngIf="clientOfIntervention?.remise" >PU HT/R</th>
-                          <th class="text-left"  *ngIf="clientOfIntervention?.tva" >Mnt TVA</th>
-                          <th>PU TTC</th>
-                          <th>PT TTC</th>
+                          <th class="text-left" >Numero de serie</th>
+                          
                            <!--<th class="text-right">TIMBRE</th>-->
                         </tr>
                     </thead>
@@ -337,15 +257,8 @@
                         <tr *ngFor="let off of newOffre?.diagnostics; let i = index">
                           <td class="no">{{i+1}}</td>
                           <td class="text-left">{{off?.diagnostic}}</td>
-                          <td class="text-left"> {{off?.piecederechange}} </td>
-                          <td class="unit"> {{off?.nombredepiece}}</td>
-                            <td class="unit" *ngIf="clientOfIntervention?.tva"> {{off?.tva}} </td>
-                            <td class="unit"> {{off?.puht}} </td>
-                            <td class="unit" *ngIf="clientOfIntervention?.remise" > {{off?.remise}} </td>
-                            <td class="unit" *ngIf="clientOfIntervention?.remise"> {{off?.puhtr}} </td>
-                            <td class="unit" *ngIf="clientOfIntervention?.tva"> {{off?.mnttva}} </td>
-                            <td class="unit"> {{off?.puttc}} </td>
-                            <td class="unit"> {{off?.ptttc}} </td>
+                          <td class="text-left"> {{off?.numserie}} </td>
+                          
                         </tr>
 
 
@@ -353,29 +266,14 @@
                     <tfoot >
                         <tr >
                             <td colspan="4"></td>
-                            <td colspan="4">TOTAL HTVA</td>
-                            <td>{{newOffre?.totalHTV}}</td>
+                            
                         </tr>
-                        <tr  *ngIf="clientOfIntervention?.tva">
-                            <td colspan="4"></td>
-                            <td colspan="4">TVA</td>
-                            <td>{{newOffre?.TVA}}</td>
-                        </tr>
-                        <tr  *ngIf="clientOfIntervention?.timbre">
-                            <td colspan="4"></td>
-                            <td colspan="4">TIMBRE</td>
-                            <td>{{newOffre?.timbre}}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4"></td>
-                            <td colspan="4">TOT TTC</td>
-                            <td>{{newOffre?.totalTTC}}</td>
-                        </tr>
+                       
                     </tfoot>
                 </table>
 
                 <div class="notices">
-                  <div>ARRETER LA PRESENTE OFFRE DE PRIX A: <h2>{{newOffre?.numberToLetter}}</h2></div>
+                  <div>veuillez signer ici: <h2></h2></div>
                     <!--<div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>-->
                 </div>
             </main>
@@ -387,3 +285,4 @@
         <div></div>
     </div>
 </div>
+

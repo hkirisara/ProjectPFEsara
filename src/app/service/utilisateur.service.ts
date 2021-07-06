@@ -28,7 +28,7 @@ export class UtilisateurService {
 
   }
   deleteUtilisateur(id:any) {
-    return this.httpClient.delete(`${this.utilisateurUrl}/${id}`);
+    return this.httpClient.delete(`${this.utilisateurUrl}/delete/${id}`);
   }
   searchByUser(user: string) {
     return this.httpClient.get(`${this.utilisateurUrl}/search/${user}`);
